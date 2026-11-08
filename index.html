@@ -1,0 +1,240 @@
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body><title>お正月2027 ご注文フォーム｜魚河岸 美舟</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@600;700&display=swap">
+<style>
+/* お客様用：スマホで縦に進む1列のフォーム。藍を基調に、合計は下に固定 */
+:root{--bg:#f4f5f1;--surface:#ffffff;--ink:#1b2320;--muted:#5b6661;--line:#dadfd8;--ai:#24446a;--ai-ink:#fff;--ai-soft:#e3eaf3;--shu:#b23f28;--shu-soft:#f8e6e1;--green:#06c755;
+--f-d:"Zen Old Mincho","Hiragino Mincho ProN","Yu Mincho",serif;--f-b:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic","Meiryo",sans-serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#111513;--surface:#191f1c;--ink:#e5eae6;--muted:#9aa6a0;--line:#2b3430;--ai:#93b3da;--ai-ink:#0e1824;--ai-soft:#1d2a3a;--shu:#e88269;--shu-soft:#3a201a;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#111513;--surface:#191f1c;--ink:#e5eae6;--muted:#9aa6a0;--line:#2b3430;--ai:#93b3da;--ai-ink:#0e1824;--ai-soft:#1d2a3a;--shu:#e88269;--shu-soft:#3a201a;color-scheme:dark}
+*{box-sizing:border-box}[hidden]{display:none!important}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-b);font-size:15px;line-height:1.65;margin:0}
+button,input,select,textarea{font:inherit;color:inherit}
+.wrap{max-width:1120px;margin:0 auto;padding-block:20px 150px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:16px}
+header{position:relative;overflow:hidden;background:var(--hdr-bg,var(--ai));color:var(--hdr-ink,var(--ai-ink));border-radius:14px;padding:22px 20px;display:flex;flex-direction:column;gap:6px;isolation:isolate;box-shadow:inset 0 0 0 1px var(--hdr-line,transparent)}
+header::before{content:"";position:absolute;inset:0;background-image:var(--hdr-pat,none);background-size:var(--hdr-pat-size,48px 24px);opacity:var(--hdr-pat-op,.18);z-index:-1}
+header::after{content:"";position:absolute;inset:6px;border:1px solid var(--hdr-line,transparent);border-radius:10px;pointer-events:none;z-index:-1}
+.hero-deco{position:absolute;right:-18px;top:-18px;width:150px;height:150px;opacity:.9;z-index:-1;pointer-events:none}
+.hero-deco svg{width:100%;height:100%}
+header .shop{color:var(--hdr-sub,inherit)}
+header h1 .cp{display:block}
+header .shop{font-size:13px;opacity:.95;letter-spacing:.08em}
+header h1{font-family:var(--f-d);font-size:28px;margin:0;letter-spacing:.06em;line-height:1.3;text-wrap:balance;max-width:calc(100% - 70px)}
+header h1 small{display:block;font-size:15px;letter-spacing:.2em;margin-top:2px;color:var(--hdr-sub,inherit)}
+header ul{margin:4px 0 0;padding-left:18px;font-size:13.5px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:16px;display:flex;flex-direction:column;gap:12px}
+h2{font-size:16px;margin:0}
+.note{font-size:12.5px;color:var(--muted)}
+.item{border-top:1px solid var(--line);padding-top:12px;display:flex;flex-direction:column;gap:8px}
+.item:first-of-type{border-top:0;padding-top:0}
+.item .nm{display:flex;justify-content:space-between;gap:8px;font-weight:700}
+.item .nm span{font-weight:500;color:var(--muted);font-variant-numeric:tabular-nums;white-space:nowrap}
+.combo{display:grid;grid-template-columns:minmax(0,1fr) 132px;gap:6px 10px;align-items:center}
+.qty{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.qty button{border:0;background:var(--bg);width:38px;height:38px;font-size:18px;font-weight:700;cursor:pointer}
+.qty input{border:0;width:100%;text-align:center;background:var(--surface);font-variant-numeric:tabular-nums}
+label.f{display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)}
+input[type=text],input[type=tel],select,textarea{width:100%;border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:10px 12px;min-width:0}
+textarea{min-height:70px;resize:vertical}
+.seg{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.seg button{flex:1;border:0;background:var(--surface);padding:10px;cursor:pointer;border-right:1px solid var(--line)}
+.seg button:last-child{border-right:0}.seg button.on{background:var(--ai);color:var(--ai-ink);font-weight:700}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line);background:var(--surface);border-radius:20px;padding:6px 14px;cursor:pointer}
+.chip.on{background:var(--ai);color:var(--ai-ink);border-color:var(--ai)}
+.req{color:var(--shu);font-size:11px;margin-left:4px}
+.bar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));box-shadow:0 -6px 20px rgba(0,0,0,.08)}
+.bar .in{max-width:640px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.tot{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.btn{border:1px solid var(--line);background:var(--surface);border-radius:10px;padding:11px 16px;font-weight:700;cursor:pointer;text-decoration:none;color:var(--ink);display:inline-flex;align-items:center;justify-content:center;gap:6px}
+.btn.line{background:var(--green);border-color:var(--green);color:#fff}
+.btn.pri{background:var(--ai);border-color:var(--ai);color:var(--ai-ink)}
+.warn{background:var(--shu-soft);color:var(--shu);border-radius:10px;padding:10px 12px;font-size:13.5px}
+.info{background:var(--ai-soft);border-radius:10px;padding:12px;font-size:13.5px}
+.msg{white-space:pre-wrap;background:var(--bg);border-radius:10px;padding:12px;font-size:13px;max-height:260px;overflow:auto}
+:focus-visible{outline:2px solid var(--ai);outline-offset:2px}
+.cols{display:grid;grid-template-columns:minmax(0,1fr);gap:16px}
+.col-main,.col-side{display:flex;flex-direction:column;gap:16px;min-width:0}
+.linkb{border:0;background:none;padding:0;color:var(--ai);text-decoration:underline;cursor:pointer;font:inherit}
+@media (max-width:899px){.wrap{max-width:640px}.sum-card{display:none}}
+@media (min-width:900px){
+  .cols{grid-template-columns:minmax(0,1.25fr) minmax(340px,1fr);align-items:start}
+  .col-side{position:sticky;top:16px;max-height:calc(100vh - 32px);overflow:auto;padding-right:2px}
+  .bar{display:none}.wrap{padding-block:24px 40px}
+  header{flex-direction:row;align-items:flex-end;justify-content:space-between;gap:20px}header ul{margin:0}
+}
+@media (pointer:coarse){.qty button{width:46px;height:46px}.chip{padding:9px 16px}}
+</style>
+
+<div class="wrap" id="app"><div class="card"><h2>読み込み中</h2></div></div>
+<div class="bar" id="bar" hidden><div class="in"><div><div class="note" id="barNote"></div><div class="tot" id="barTot">¥0</div></div><button class="btn pri" id="toConfirm" type="button">内容を確認する</button></div></div>
+<script type="application/json" id="form-data">{"generatedAt":"2026-11-06T10:56:51.303Z","confirmText":"4日","confirmPhrase":"4日以内（営業日）","contactBack":"お電話（042-725-3296・平日9:00〜13:00）またはLINE（@811ythfh）でお店にご連絡ください。","shop":{"name":"魚河岸 美舟","tel":"042-725-3296","fax":"042-725-3296","address":"東京都町田市藤の台1-1-51-102（藤の台ショッピングセンター内）","lineId":"@811ythfh","telHours":"平日9:00〜13:00"},"campaign":{"name":"お正月2027","theme":"","earlyDeadline":"2026-12-20","earlyRate":10,"pickupRate":10,"minOrder":5000,"deliveryDates":["2027-01-01","2027-01-02","2027-01-03"],"pickupDates":["2026-12-31","2027-01-01","2027-01-02","2027-01-03"],"timeSlots":["10時","11時","12時","13時","14時","15時","16時","17時","18時"],"note":"店内引取のみ 12/31 17時以降（寿司以外の引取可）。交通事情により時間指定に添えない場合があります。"},"menu":[{"id":"tokujo","name":"特上寿し","price":3900,"unit":"人前","cat":"寿司","opts":["mori","wasabi"],"taxRate":"","priceMode":""},{"id":"jo","name":"上寿し","price":2400,"unit":"人前","cat":"寿司","opts":["mori","wasabi"],"taxRate":"","priceMode":""},{"id":"osechi","name":"おせち（2人前）","price":7700,"unit":"個","cat":"おせち・一品","opts":[],"taxRate":"","priceMode":""},{"id":"nishime","name":"お煮しめ","price":1000,"unit":"人前","cat":"おせち・一品","opts":[],"taxRate":"","priceMode":""},{"id":"tempura","name":"天ぷら七種盛り","price":1100,"unit":"人前","cat":"おせち・一品","opts":[],"taxRate":"","priceMode":""},{"id":"kanpyo","name":"かんぴょう巻","price":350,"unit":"本","cat":"巻物","opts":[],"taxRate":"","priceMode":""},{"id":"kappa","name":"かっぱ巻","price":350,"unit":"本","cat":"巻物","opts":["wasabi"],"taxRate":"","priceMode":""},{"id":"oshinko","name":"おしんこ巻","price":350,"unit":"本","cat":"巻物","opts":[],"taxRate":"","priceMode":""},{"id":"yamagobo","name":"山牛蒡巻","price":350,"unit":"本","cat":"巻物","opts":[],"taxRate":"","priceMode":""}],"optionGroups":{"mori":{"choices":["盛り合わせ","別盛り"],"label":"盛り方"},"wasabi":{"choices":["サビ有り","サビ抜き"],"label":"ワサビ"}},"tax":{"rate":8,"mode":"incl","round":"floor"}}</script>
+<script>
+(function(){
+let D;try{D=JSON.parse(document.getElementById('form-data').textContent)}catch(e){D=null}
+if(!D){document.getElementById('app').innerHTML='<div class="card"><h2>フォームの準備中です</h2><p class="note">お店の注文管理アプリから書き出したフォームをご利用ください。</p></div>';return}
+const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const yen=n=>'¥'+Math.round(n||0).toLocaleString('ja-JP');const WD=['日','月','火','水','木','金','土'];
+const pad=n=>String(n).padStart(2,'0');const today=(()=>{const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())})();
+const md=s=>{const d=new Date(s+'T00:00:00');return (d.getMonth()+1)+'月'+d.getDate()+'日('+WD[d.getDay()]+')'};
+const C=D.campaign||{};/* キャンペーン名から見た目を決める（お正月・節分・ひな祭り・母の日・土用の丑・お盆・敬老・秋・七五三・クリスマス） */
+/*THEMES-START*/
+const svgUrl=s=>`url("data:image/svg+xml,${encodeURIComponent(s)}")`;
+const PAT={
+  seigaiha:(c)=>svgUrl(`<svg xmlns='http://www.w3.org/2000/svg' width='48' height='24' viewBox='0 0 48 24'><g fill='none' stroke='${c}' stroke-width='1.2'>${[0,24,48].map(x=>[11,7.5,4].map(r=>`<circle cx='${x}' cy='24' r='${r*2}'/>`).join('')).join('')}${[12,36].map(x=>[11,7.5,4].map(r=>`<circle cx='${x}' cy='12' r='${r*2}'/>`).join('')).join('')}</g></svg>`),
+  hishi:(c)=>svgUrl(`<svg xmlns='http://www.w3.org/2000/svg' width='28' height='28' viewBox='0 0 28 28'><path d='M14 2 26 14 14 26 2 14z' fill='none' stroke='${c}' stroke-width='1.2'/><path d='M14 8 20 14 14 20 8 14z' fill='${c}' fill-opacity='.35'/></svg>`),
+  dots:(c)=>svgUrl(`<svg xmlns='http://www.w3.org/2000/svg' width='26' height='26' viewBox='0 0 26 26'><circle cx='6' cy='6' r='2.4' fill='${c}'/><circle cx='19' cy='19' r='2.4' fill='${c}'/></svg>`),
+  wave:(c)=>svgUrl(`<svg xmlns='http://www.w3.org/2000/svg' width='60' height='20' viewBox='0 0 60 20'><path d='M0 10 Q15 0 30 10 T60 10' fill='none' stroke='${c}' stroke-width='1.4'/><path d='M0 18 Q15 8 30 18 T60 18' fill='none' stroke='${c}' stroke-width='1' opacity='.6'/></svg>`),
+  asanoha:(c)=>svgUrl(`<svg xmlns='http://www.w3.org/2000/svg' width='40' height='46' viewBox='0 0 40 46'><g fill='none' stroke='${c}' stroke-width='.9'><path d='M20 0v46M0 11.5l40 23M0 34.5l40-23M20 0 0 11.5v23L20 46l20-11.5v-23z'/><path d='M20 23 0 11.5M20 23l20-11.5M20 23 0 34.5M20 23l20 11.5'/></g></svg>`),
+  snow:(c)=>svgUrl(`<svg xmlns='http://www.w3.org/2000/svg' width='36' height='36' viewBox='0 0 36 36'><g fill='${c}'><circle cx='6' cy='8' r='1.8'/><circle cx='24' cy='4' r='1.2'/><circle cx='30' cy='22' r='2'/><circle cx='14' cy='26' r='1.4'/></g></svg>`)
+};
+const DECO={
+  ume:(c,c2)=>`<svg viewBox='0 0 100 100'><g fill='${c}'>${[[60,38,15],[30,68,10],[80,72,8]].map(([x,y,r])=>[0,72,144,216,288].map(a=>`<circle cx='${x+Math.cos((a-90)*Math.PI/180)*r*.62}' cy='${y+Math.sin((a-90)*Math.PI/180)*r*.62}' r='${r*.5}'/>`).join('')+`<circle cx='${x}' cy='${y}' r='${r*.28}' fill='${c2}'/>`).join('')}</g></svg>`,
+  sun:(c)=>`<svg viewBox='0 0 100 100'><circle cx='62' cy='40' r='26' fill='${c}'/></svg>`,
+  mame:(c)=>`<svg viewBox='0 0 100 100'><g fill='${c}'>${[[50,40],[68,52],[44,62],[62,70],[78,36]].map(([x,y])=>`<ellipse cx='${x}' cy='${y}' rx='7' ry='6'/>`).join('')}</g></svg>`,
+  flower:(c,c2)=>`<svg viewBox='0 0 100 100'><g fill='${c}'>${[0,45,90,135,180,225,270,315].map(a=>`<ellipse cx='60' cy='40' rx='9' ry='22' transform='rotate(${a} 60 40)' opacity='.85'/>`).join('')}</g><circle cx='60' cy='40' r='8' fill='${c2}'/></svg>`,
+  leaf:(c)=>`<svg viewBox='0 0 100 100'><g fill='${c}'>${[0,60,120,180,240,300].map(a=>`<path d='M60 40 L64 20 L60 24 L56 20z' transform='rotate(${a} 60 40) scale(1)'/>`).join('')}<path d='M60 40 l-3 22' stroke='${c}' stroke-width='3'/></g></svg>`,
+  star:(c)=>`<svg viewBox='0 0 100 100'><path d='M60 14l6.5 15 16 1.5-12 10.5 3.6 16L60 48.8 45.9 57l3.6-16-12-10.5 16-1.5z' fill='${c}'/></svg>`,
+  lantern:(c,c2)=>`<svg viewBox='0 0 100 100'><rect x='50' y='22' width='24' height='40' rx='11' fill='${c}'/><rect x='55' y='18' width='14' height='5' fill='${c2}'/><rect x='55' y='61' width='14' height='5' fill='${c2}'/></svg>`
+};
+const THEMES=[
+  {id:'oshogatsu',label:'お正月（朱赤・青海波・梅）',k:/正月|新年|おせち|年越|迎春|新春/,bg:'linear-gradient(135deg,#9e1b24 0%,#c22f2c 55%,#8f1720 100%)',ink:'#fff8ec',sub:'#f3d58c',line:'rgba(243,213,140,.7)',pat:PAT.seigaiha('#f3d58c'),size:'48px 24px',op:.22,deco:DECO.ume('#fff3f0','#e2b54c'),ai:'#9e1b24',aiD:'#f08a7e',soft:'#fbe9e6',softD:'#3a1a1a',sub2:'迎春'},
+  {id:'shichigosan',label:'七五三（えんじ・麻の葉）',k:/七五三/,bg:'linear-gradient(135deg,#7b1f3a,#b2405a)',ink:'#fff7f0',sub:'#f1cf86',line:'rgba(241,207,134,.6)',pat:PAT.asanoha('#f1cf86'),size:'40px 46px',op:.2,deco:DECO.ume('#ffe9ee','#f1cf86'),ai:'#8e2943',aiD:'#f08aa2',soft:'#fbe8ee',softD:'#3a1a24',sub2:'七五三'},
+  {id:'setsubun',label:'節分・恵方巻（深緑・豆）',k:/節分|恵方|豆まき/,bg:'linear-gradient(135deg,#2c3e1f,#4a6b2a)',ink:'#fffbe8',sub:'#f2d35b',line:'rgba(242,211,91,.6)',pat:PAT.dots('#f2d35b'),size:'26px 26px',op:.25,deco:DECO.mame('#f2d35b'),ai:'#3f5f22',aiD:'#b9d98b',soft:'#eef4e3',softD:'#1f2a16',sub2:'節分'},
+  {id:'hina',label:'ひな祭り（桃色・菱）',k:/ひな|雛|桃の節句/,bg:'linear-gradient(135deg,#e8879b,#f4b6c2)',ink:'#4a1625',sub:'#7d2b40',line:'rgba(255,255,255,.7)',pat:PAT.hishi('#ffffff'),size:'28px 28px',op:.35,deco:DECO.ume('#ffffff','#7fb069'),ai:'#b44463',aiD:'#f2a3b6',soft:'#fbe8ee',softD:'#3a1a24',sub2:'桃の節句'},
+  {id:'spring',label:'春・花見（桜色）',k:/春|花見|桜|さくら|入学|卒業|新生活/,bg:'linear-gradient(135deg,#f2b8c6,#f8d7e0)',ink:'#4a2030',sub:'#8a3a55',line:'rgba(255,255,255,.75)',pat:PAT.dots('#ffffff'),size:'26px 26px',op:.45,deco:DECO.ume('#ffffff','#e57a9a'),ai:'#b5486a',aiD:'#f2a3b6',soft:'#fbe9ef',softD:'#3a1a24',sub2:'春のおたのしみ'},
+  {id:'mother',label:'母の日（ピンク・花）',k:/母の日|カーネーション/,bg:'linear-gradient(135deg,#c2185b,#ec6f95)',ink:'#fff5f8',sub:'#ffe0ea',line:'rgba(255,255,255,.55)',pat:PAT.dots('#ffffff'),size:'26px 26px',op:.18,deco:DECO.flower('#ffd6e3','#c2185b'),ai:'#b0164f',aiD:'#f48fb1',soft:'#fde7ef',softD:'#3a1a26',sub2:'感謝をこめて'},
+  {id:'father',label:'父の日（青・太陽）',k:/父の日/,bg:'linear-gradient(135deg,#1f4e79,#3c7ab0)',ink:'#f2f8ff',sub:'#ffe08a',line:'rgba(255,224,138,.5)',pat:PAT.dots('#ffe08a'),size:'26px 26px',op:.18,deco:DECO.sun('#ffe08a'),ai:'#1f4e79',aiD:'#8fbbe6',soft:'#e6f0fa',softD:'#16263a',sub2:'感謝をこめて'},
+  {id:'summer',label:'夏・土用の丑（青緑・波）',k:/土用|丑|うなぎ|鰻|暑中|夏/,bg:'linear-gradient(135deg,#0f4c5c,#1b7a87)',ink:'#f0fbfc',sub:'#f6c344',line:'rgba(246,195,68,.55)',pat:PAT.wave('#bfe9ee'),size:'60px 20px',op:.3,deco:DECO.sun('#f6c344'),ai:'#0f5866',aiD:'#7fd0db',soft:'#e2f3f5',softD:'#122c31',sub2:'夏の味'},
+  {id:'obon',label:'お盆・夏祭り（紺・提灯）',k:/お盆|盆踊|帰省|夏祭/,bg:'linear-gradient(135deg,#1c2a52,#2f4785)',ink:'#f4f6ff',sub:'#ffb547',line:'rgba(255,181,71,.55)',pat:PAT.wave('#9fb4ff'),size:'60px 20px',op:.25,deco:DECO.lantern('#ff8a3d','#2a1a10'),ai:'#24386b',aiD:'#9fb4ff',soft:'#e8ecfa',softD:'#18203a',sub2:'夏のおもてなし'},
+  {id:'keiro',label:'敬老の日（紫・麻の葉）',k:/敬老|長寿/,bg:'linear-gradient(135deg,#4b2c63,#7b4a9a)',ink:'#fbf6ff',sub:'#f2d38a',line:'rgba(242,211,138,.55)',pat:PAT.asanoha('#e6d3f5'),size:'40px 46px',op:.2,deco:DECO.flower('#f2d38a','#4b2c63'),ai:'#5c3577',aiD:'#cfa8ea',soft:'#f1e9f7',softD:'#2a1d36',sub2:'いつまでもお元気で'},
+  {id:'autumn',label:'秋（橙・紅葉）',k:/秋|彼岸|紅葉|運動会|ハロウィン/,bg:'linear-gradient(135deg,#8a3b12,#c4651f)',ink:'#fff7ee',sub:'#ffd28a',line:'rgba(255,210,138,.55)',pat:PAT.dots('#ffd28a'),size:'26px 26px',op:.2,deco:DECO.leaf('#ffb35c'),ai:'#9a4417',aiD:'#f2a66b',soft:'#fbeee3',softD:'#33200f',sub2:'実りの季節'},
+  {id:'xmas',label:'クリスマス（緑・雪と星）',k:/クリスマス|聖夜|X'?mas/i,bg:'linear-gradient(135deg,#14532d,#1f7a45)',ink:'#f5fff8',sub:'#ffd56b',line:'rgba(255,213,107,.55)',pat:PAT.snow('#ffffff'),size:'36px 36px',op:.35,deco:DECO.star('#ffd56b'),ai:'#1a6b3c',aiD:'#86d6a6',soft:'#e5f4eb',softD:'#132c1d',sub2:'Merry Christmas'},
+  {id:'seibo',label:'お歳暮・年末（焦茶・青海波）',k:/歳暮|年末/,bg:'linear-gradient(135deg,#3b2a1a,#6b4a2b)',ink:'#fff8ee',sub:'#e8c27a',line:'rgba(232,194,122,.55)',pat:PAT.seigaiha('#e8c27a'),size:'48px 24px',op:.18,deco:DECO.ume('#f6e7cf','#b23f28'),ai:'#5a3d22',aiD:'#e0b98a',soft:'#f6eee3',softD:'#2b2117',sub2:'感謝をこめて'}
+];
+const THEME_DEFAULT={id:'default',label:'シンプル（藍）',bg:'linear-gradient(135deg,#24446a,#33608f)',ink:'#ffffff',sub:'#dbe7f5',line:'rgba(255,255,255,.35)',pat:PAT.asanoha('#ffffff'),size:'40px 46px',op:.12,deco:'',ai:'',sub2:''};
+function pickTheme(name,id){if(id&&id!=='auto'){if(id==='default')return THEME_DEFAULT;const x=THEMES.find(t=>t.id===id);if(x)return x}return THEMES.find(x=>x.k.test(name||''))||THEME_DEFAULT}
+/*THEMES-END*/
+const TH=pickTheme(C.name,C.theme);
+(()=>{const r=document.documentElement.style;r.setProperty('--hdr-bg',TH.bg);r.setProperty('--hdr-ink',TH.ink);r.setProperty('--hdr-sub',TH.sub);r.setProperty('--hdr-line',TH.line);r.setProperty('--hdr-pat',TH.pat);r.setProperty('--hdr-pat-size',TH.size);r.setProperty('--hdr-pat-op',String(TH.op));
+  if(TH.ai){const st=document.createElement('style');st.textContent=`:root{--ai:${TH.ai};--ai-soft:${TH.soft}}@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--ai:${TH.aiD};--ai-soft:${TH.softD}}}:root[data-theme="dark"]{--ai:${TH.aiD};--ai-soft:${TH.softD}}`;document.body.appendChild(st)}})();
+document.title=[C.name,'ご注文フォーム'].filter(Boolean).join(' ')+((D.shop||{}).name?'｜'+D.shop.name:'');
+const PREF='北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 栃木県 群馬県 埼玉県 千葉県 東京都 神奈川県 新潟県 富山県 石川県 福井県 山梨県 長野県 岐阜県 静岡県 愛知県 三重県 滋賀県 京都府 大阪府 兵庫県 奈良県 和歌山県 鳥取県 島根県 岡山県 広島県 山口県 徳島県 香川県 愛媛県 高知県 福岡県 佐賀県 長崎県 熊本県 大分県 宮崎県 鹿児島県 沖縄県'.split(' ');
+const toHalf=s=>String(s||'').replace(/[０-９]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0));
+const toKata=s=>String(s||'').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+0x60));const T=Object.assign({rate:8,mode:'incl',round:'floor'},D.tax||{});
+const st={qty:{},method:(C.deliveryDates||[]).length?'delivery':'pickup',date:'',time:'',name:'',kana:'',phone:'',zip:'',address:'',note:'',timeNote:'',kanaManual:false};
+try{const sv=JSON.parse(localStorage.getItem('order-form-draft')||'null');if(sv&&sv.v===D.generatedAt)Object.assign(st,sv.st)}catch(e){}
+const save=()=>{try{localStorage.setItem('order-form-draft',JSON.stringify({v:D.generatedAt,st}))}catch(e){}};
+/* 前回のお客様情報（お名前・電話・住所）をこの端末に覚えておき、次回は自動で入れます */
+const PROF=['name','kana','phone','zip','address'];let profUsed=false;
+try{const pf=JSON.parse(localStorage.getItem('order-form-profile')||'null');if(pf&&PROF.every(k=>!st[k])){PROF.forEach(k=>{if(pf[k])st[k]=pf[k]});profUsed=!!pf.name;if(pf.kana)st.kanaManual=true}}catch(e){}
+const saveProfile=()=>{try{const o={};PROF.forEach(k=>o[k]=st[k]||'');localStorage.setItem('order-form-profile',JSON.stringify(o))}catch(e){}};
+const clearProfile=()=>{try{localStorage.removeItem('order-form-profile')}catch(e){}PROF.forEach(k=>st[k]='');st.kanaManual=false;profUsed=false;kanaBuf='';save();render()};
+function combos(m){let out=[{key:m.id,opts:{}}];(m.opts||[]).forEach(g=>{const G=D.optionGroups[g];if(!G)return;const n=[];out.forEach(c=>G.choices.forEach(ch=>n.push({key:c.key+'|'+ch,opts:{...c.opts,[G.label]:ch}})));out=n});return out}
+const rnd=x=>{x=Math.round(x*1e6)/1e6;return T.round==='ceil'?Math.ceil(x):T.round==='round'?Math.round(x):Math.floor(x)};
+const has=v=>v!==''&&v!=null&&!isNaN(+v);
+function calc(){
+  let rate=0,why='';if(C.earlyDeadline&&today<=C.earlyDeadline&&C.earlyRate){rate=C.earlyRate/100;why='早期予約'}
+  if(st.method==='pickup'&&C.pickupRate&&C.pickupRate/100>=rate){rate=C.pickupRate/100;why=why?why+'・店頭引取':'店頭引取'}
+  const g={};let sub=0,items=[];
+  D.menu.forEach(m=>combos(m).forEach(cb=>{const q=+st.qty[cb.key]||0;if(!q)return;items.push({m,cb,q});const l=m.price*q;sub+=l;const r=has(m.taxRate)?+m.taxRate:+T.rate;const md2=m.priceMode==='excl'||m.priceMode==='incl'?m.priceMode:(T.mode==='excl'?'excl':'incl');const d=Math.round(l*(1-rate));(g[r]=g[r]||{incl:0,excl:0})[md2]+=d}));
+  let tot=0;Object.entries(g).forEach(([r,v])=>{tot+=v.incl+v.excl+rnd(v.excl*r/100)});
+  return{items,sub,tot,rate,why}
+}
+function dates(){return (st.method==='delivery'?C.deliveryDates:C.pickupDates)||[]}
+function render(){
+  const cats=[...new Set(D.menu.map(m=>m.cat||'メニュー'))];
+  const s=D.shop||{};const r=calc();
+  $('#app').innerHTML=`<header>${TH.deco?`<div class="hero-deco" aria-hidden="true">${TH.deco}</div>`:''}<div class="shop">${esc(s.name)}${TH.sub2?'　'+esc(TH.sub2):''}</div><h1>${esc(C.name||'ご注文')}<small>ご注文フォーム</small></h1>
+    <ul>${C.earlyDeadline&&C.earlyRate?`<li>${md(C.earlyDeadline)}までのご注文で${C.earlyRate}%割引</li>`:''}${C.pickupRate?`<li>店頭でのお引き取りは${C.pickupRate}%割引</li>`:''}${C.minOrder?`<li>${yen(C.minOrder)}（税込）から承ります</li>`:''}${C.note?`<li>${esc(C.note)}</li>`:''}${s.tel?`<li>お電話（${esc(s.tel)}${s.telHours?'・'+esc(s.telHours):''}）${s.fax?`・FAX（${esc(s.fax)}）`:''}でもご注文いただけます</li>`:''}</ul></header>
+  <div class="cols"><div class="col-main">${cats.map(cat=>`<section class="card"><h2>${esc(cat)}</h2>${D.menu.filter(m=>(m.cat||'メニュー')===cat).map(m=>`<div class="item"><div class="nm">${esc(m.name)}<span>${yen(m.price)}/${esc(m.unit||'')}${m.priceMode==='excl'||(!m.priceMode&&T.mode==='excl')?'（税別）':''}</span></div>
+    <div class="combo">${combos(m).map(cb=>`<span class="note">${esc(Object.values(cb.opts).join('・')||'数量')}</span><div class="qty"><button type="button" data-d="-1" data-k="${esc(cb.key)}" aria-label="減らす">−</button><input inputmode="numeric" data-q="${esc(cb.key)}" value="${+st.qty[cb.key]||''}" aria-label="${esc(m.name)} ${esc(Object.values(cb.opts).join('・'))}の数"><button type="button" data-d="1" data-k="${esc(cb.key)}" aria-label="増やす">＋</button></div>`).join('')}</div></div>`).join('')}</section>`).join('')}
+  </div><aside class="col-side"><section class="card"><h2>お受け取り</h2>
+    <div class="seg">${(C.deliveryDates||[]).length?`<button type="button" data-m="delivery" class="${st.method==='delivery'?'on':''}">お届け（出前）</button>`:''}${(C.pickupDates||[]).length?`<button type="button" data-m="pickup" class="${st.method==='pickup'?'on':''}">店頭でお引き取り</button>`:''}</div>
+    <div><div class="note">日にち<span class="req">必須</span></div><div class="chips">${dates().map(d=>`<button type="button" class="chip ${st.date===d?'on':''}" data-date="${d}">${md(d)}</button>`).join('')||'<span class="note">お店にご相談ください</span>'}</div></div>
+    <div><div class="note">ご希望の時間</div><div class="chips">${(C.timeSlots||[]).map(t=>`<button type="button" class="chip ${st.time===t?'on':''}" data-time="${esc(t)}">${esc(t)}</button>`).join('')}</div>
+      <label class="f" style="margin-top:8px"><span>時間の備考<span class="note" style="margin-left:6px">例：11時半ごろ希望／午前中ならいつでも</span></span><input type="text" id="i_timeNote" value="${esc(st.timeNote||'')}" placeholder="ご希望があればご記入ください"></label></div></section>
+  <section class="card"><h2>お客様情報</h2>${profUsed?`<div class="info" style="padding:8px 12px;font-size:12.5px">前回の内容を入れました。違う方のご注文は <button type="button" class="linkb" id="clearProf">消して入れ直す</button></div>`:''}
+    <label class="f"><span>お名前<span class="req">必須</span></span><input type="text" id="i_name" autocomplete="name" value="${esc(st.name)}"></label>
+    <label class="f"><span>フリガナ<span class="note" style="margin-left:6px">お名前から自動で入ります（直せます）</span></span><input type="text" id="i_kana" value="${esc(st.kana)}"></label>
+    <label class="f"><span>電話番号<span class="req">必須</span></span><input type="tel" id="i_phone" autocomplete="tel" value="${esc(st.phone)}"></label>
+    ${st.method==='delivery'?`<div class="f" style="display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)">郵便番号<div style="display:flex;gap:8px"><input type="text" id="i_zip" inputmode="numeric" autocomplete="postal-code" value="${esc(st.zip)}" placeholder="例 194-0039" style="max-width:160px"><button type="button" class="btn" id="zipBtn">住所を検索</button></div><span class="note" id="zipMsg">7桁を入れると住所が自動で入ります</span></div>
+    <label class="f"><span>お届け先のご住所<span class="req">必須</span></span><input type="text" id="i_address" autocomplete="street-address" value="${esc(st.address)}" placeholder="番地・建物名・部屋番号まで"></label>`:''}
+    <label class="f">ご要望（アレルギー・お皿の分け方など）<textarea id="i_note">${esc(st.note)}</textarea></label></section>
+  <div class="info">ご注文はLINEでお店に届きます。お店から<b>受付完了のご連絡</b>をLINEでお送りして、ご注文が確定します。${D.confirmPhrase?`${D.confirmPhrase}にご連絡がない場合は、`:D.confirmText?`${D.confirmText}以内（営業時間内）にご連絡がない場合は、`:D.confirmHours?`${D.confirmHours}時間以内（営業時間内）にご連絡がない場合は、`:'ご連絡がない場合は、'}お手数ですが${D.contactBack?esc(D.contactBack):`お電話（${esc(s.tel||'')}）${s.lineId?'またはLINE（'+esc(s.lineId)+'）':'またはLINE'}でお店にご連絡ください。`}</div>
+  <section class="card sum-card"><h2>ご注文内容</h2><div id="sumList" class="note">まだ選ばれていません</div><div style="display:flex;justify-content:space-between;align-items:baseline"><span class="note" id="sumNote2"></span><span class="tot" id="sumTot2">¥0</span></div><button class="btn pri" id="toConfirm2" type="button">内容を確認する</button></section>
+  <div id="confirm"></div></aside></div>`;
+  updateBar();bindExtras();
+}
+const fmtZip=z=>{z=toHalf(z).replace(/\D/g,'');return z.length===7?z.slice(0,3)+'-'+z.slice(3):z};
+/* フリガナの自動入力：日本語入力で変換する前のひらがなを拾ってカタカナにします */
+let kanaBuf='',kanaComp='';
+function bindExtras(){
+  const n=$('#i_name'),k=$('#i_kana');
+  if(n&&k){
+    k.addEventListener('input',()=>{st.kanaManual=k.value.trim()!==''&&k.value!==toKata(kanaBuf);if(!k.value.trim())st.kanaManual=false;st.kana=k.value;save()});
+    n.addEventListener('compositionstart',()=>{kanaComp=''});
+    n.addEventListener('compositionupdate',e=>{const d=String(e.data||'');if(/[ぁ-ゖ]/.test(d)&&/^[ぁ-ゖーァ-ヺ\s　ａ-ｚa-z]*$/i.test(d))kanaComp=d.replace(/[ａ-ｚa-z]/gi,'')});
+    n.addEventListener('compositionend',()=>{if(kanaComp){kanaBuf+=kanaComp;kanaComp=''}putKana()});
+    n.addEventListener('input',e=>{
+      if(!n.value.trim()){kanaBuf='';putKana();return}
+      if(!e.isComposing&&e.inputType==='insertText'&&e.data){const d=e.data;if(/^[\s　]+$/.test(d))kanaBuf+='　';else if(/^[ぁ-ゖァ-ヺー]+$/.test(d))kanaBuf+=d;putKana()}
+      if(e.inputType&&e.inputType.startsWith('delete')&&n.value.length<2&&!n.value.trim()){kanaBuf='';putKana()}
+    });
+  }
+  const z=$('#i_zip');
+  if(z){z.addEventListener('input',()=>{st.zip=z.value;save();if(toHalf(z.value).replace(/\D/g,'').length===7)findAddress()});$('#zipBtn').onclick=findAddress}
+}
+function putKana(){const k=$('#i_kana');if(!k||st.kanaManual)return;k.value=toKata(kanaBuf).replace(/^[\s　]+/,'');st.kana=k.value;save()}
+let zipBusy=false;
+async function findAddress(){
+  const z=toHalf(($('#i_zip')||{}).value||'').replace(/\D/g,'');const msg=$('#zipMsg');
+  if(z.length!==7){if(msg)msg.textContent='郵便番号は7桁で入れてください';return}
+  if(zipBusy)return;zipBusy=true;if(msg)msg.textContent='検索しています…';
+  let v=null;
+  try{const r=await fetch('zip2/'+z.slice(0,2)+'.json');if(r.ok){const d=await r.json();v=d[z]||null}}catch(e){}
+  if(!v){v=await new Promise(res=>{const done=x=>{res(x);clearTimeout(tm)};const tm=setTimeout(()=>done(null),5000);window.$yubin=d=>done(d[z]?[+d[z][0],d[z][1],d[z][2]]:null);const sc=document.createElement('script');sc.src='https://yubinbango.github.io/yubinbango-data/data/'+z.slice(0,3)+'.js';sc.onerror=()=>done(null);document.head.appendChild(sc)})}
+  zipBusy=false;
+  if(!v){if(msg)msg.textContent='住所が見つかりませんでした。番号を確かめるか、住所を直接入れてください';return}
+  const a=PREF[+v[0]-1]+v[1]+v[2];const ad=$('#i_address');
+  if(ad){if(!ad.value.trim()||!ad.value.startsWith(a)){ad.value=a}ad.focus();ad.setSelectionRange(ad.value.length,ad.value.length)}
+  st.zip=fmtZip(z);st.address=ad?ad.value:a;save();if(msg)msg.textContent='住所を入れました。続けて番地・建物名をご記入ください';
+}
+function updateBar(){const r=calc();$('#bar').hidden=false;$('#barTot').textContent=yen(r.tot);const nt=`${r.items.reduce((a,b)=>a+b.q,0)}点`+(r.rate?`・${Math.round(r.rate*100)}%割引後`:'')+'・税込';$('#barNote').textContent=nt;
+  const sl=$('#sumList');if(sl){sl.innerHTML=r.items.length?r.items.map(i=>`<div style="display:flex;justify-content:space-between;gap:8px;color:var(--ink)"><span>${esc(i.m.name)}${Object.values(i.cb.opts).length?'<span class="note">（'+esc(Object.values(i.cb.opts).join('・'))+'）</span>':''}</span><span style="white-space:nowrap">×${i.q}</span></div>`).join(''):'まだ選ばれていません';$('#sumTot2').textContent=yen(r.tot);$('#sumNote2').textContent=nt}}
+function readInputs(){['name','kana','phone','zip','address','note','timeNote'].forEach(k=>{const el=$('#i_'+k);if(el)st[k]=el.value.trim()});save()}
+function message(r){const s=D.shop||{};
+  return [`【ご注文】${s.name||''} ${C.name||''}`.trim(),`■お名前：${st.name}${st.kana?`（${st.kana}）`:''}`,`■電話：${st.phone}`,`■受取：${st.method==='delivery'?'配送':'店頭引取'} ${md(st.date)} ${st.time||'時間おまかせ'}`,st.timeNote?`■時間の備考：${st.timeNote}`:'',
+    st.method==='delivery'?`■お届け先：${st.zip?'〒'+fmtZip(st.zip)+' ':''}${st.address}`:'', '■ご注文：',...r.items.map(i=>`・${i.m.name}${Object.values(i.cb.opts).length?'［'+Object.values(i.cb.opts).join('・')+'］':''} ×${i.q}`),
+    `■見込み合計：${yen(r.tot)}（税込${r.rate?`・${r.why}${Math.round(r.rate*100)}%割引後`:''}）`,st.note?`■ご要望：${st.note}`:'','（注文フォームより送信）'].filter(Boolean).join('\n')}
+function confirmView(){
+  readInputs();const r=calc();const errs=[];
+  if(!r.items.length)errs.push('ご注文の数量を入れてください');if(!st.date)errs.push('お受け取りの日にちを選んでください');if(!st.name)errs.push('お名前を入れてください');if(!st.phone)errs.push('電話番号を入れてください');if(st.method==='delivery'&&!st.address)errs.push('お届け先のご住所を入れてください');
+  if(C.minOrder&&r.tot<C.minOrder)errs.push(`${yen(C.minOrder)}（税込）以上のご注文で承ります`);
+  const box=$('#confirm');
+  if(errs.length){box.innerHTML=`<div class="warn">${errs.map(esc).join('<br>')}</div>`;box.scrollIntoView({behavior:'smooth',block:'center'});return}
+  saveProfile();const text=message(r);const s=D.shop||{};const id=String(s.lineId||'').trim();
+  const url=id?`https://line.me/R/oaMessage/${encodeURIComponent(id.startsWith('@')?id:'@'+id)}/?${encodeURIComponent(text)}`:`https://line.me/R/msg/text/?${encodeURIComponent(text)}`;
+  box.innerHTML=`<section class="card"><h2>この内容でLINEから送ります</h2><div class="msg" id="msgText">${esc(text)}</div>
+    <a class="btn line" href="${esc(url)}" target="_blank" rel="noopener">LINEで注文を送る</a>
+    ${id?'':'<div class="note">LINEが開いたら、送り先に「'+esc(s.name||'お店')+'」のトークを選んでください。</div>'}
+    <button type="button" class="btn" id="copyBtn">文面をコピーする（LINEが開かない時）</button>
+    <div class="note">パソコン・iPadでLINEが開かない時は、文面をコピーしてLINEのトークに貼り付けて送ってください。${s.tel?`お電話（<a href="tel:${esc(String(s.tel).replace(/[^0-9+]/g,''))}">${esc(s.tel)}</a>${s.telHours?'・'+esc(s.telHours):''}）${s.fax?`・FAX（${esc(s.fax)}）`:''}でも承ります。`:''}</div>
+    <div class="note">見込み合計は目安です。お店からの受付完了のご連絡で金額が確定します。</div>
+    <div class="warn">送信後、${D.confirmPhrase?esc(D.confirmPhrase)+'に':''}お店から受付完了のご連絡がない場合は、お手数ですが${D.contactBack?esc(D.contactBack):'お電話またはLINEでお店にご連絡ください。'}</div></section>`;
+  box.scrollIntoView({behavior:'smooth',block:'start'});
+  $('#copyBtn').onclick=async()=>{try{await navigator.clipboard.writeText(text);$('#copyBtn').textContent='コピーしました。LINEのトークに貼り付けて送ってください'}catch(e){const sel=getSelection(),rg=document.createRange();rg.selectNodeContents($('#msgText'));sel.removeAllRanges();sel.addRange(rg);$('#copyBtn').textContent='文面を選択しました。コピーしてLINEに貼り付けてください'}};
+}
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+  if(b.dataset.d){const k=b.dataset.k;st.qty[k]=Math.max(0,(+st.qty[k]||0)+(+b.dataset.d));const i=document.querySelector(`[data-q="${CSS.escape(k)}"]`);if(i)i.value=st.qty[k]||'';save();updateBar();return}
+  if(b.dataset.m){readInputs();st.method=b.dataset.m;if(!dates().includes(st.date))st.date='';save();render();return}
+  if(b.dataset.date){readInputs();st.date=b.dataset.date;save();render();return}
+  if(b.dataset.time){readInputs();st.time=st.time===b.dataset.time?'':b.dataset.time;save();render();return}
+  if(b.id==='toConfirm'||b.id==='toConfirm2')confirmView();
+  if(b.id==='clearProf')clearProfile();
+});
+document.addEventListener('input',e=>{const t=e.target;if(t.dataset.q!==undefined){st.qty[t.dataset.q]=Math.max(0,parseInt(String(t.value).replace(/[０-９]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0)))||0);save();updateBar()}else if(t.id&&t.id.startsWith('i_'))readInputs()});
+render();
+})();
+</script>
+</body></html>
