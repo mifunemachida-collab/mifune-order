@@ -10,6 +10,8 @@
 *{box-sizing:border-box}[hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-b);font-size:15px;line-height:1.65;margin:0}
 button,input,select,textarea{font:inherit;color:inherit}
+/* iPhoneで入力欄をタップした時に画面が拡大しないよう、入力欄の文字は16px以上にします */
+input,select,textarea{font-size:16px}
 .wrap{max-width:1120px;margin:0 auto;padding-block:20px 150px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:16px}
 header{position:relative;overflow:hidden;background:var(--hdr-bg,var(--ai));color:var(--hdr-ink,var(--ai-ink));border-radius:14px;padding:22px 20px;display:flex;flex-direction:column;gap:6px;isolation:isolate;box-shadow:inset 0 0 0 1px var(--hdr-line,transparent)}
 header::before{content:"";position:absolute;inset:0;background-image:var(--hdr-pat,none);background-size:var(--hdr-pat-size,48px 24px);opacity:var(--hdr-pat-op,.18);z-index:-1}
@@ -77,7 +79,11 @@ const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"']
 const yen=n=>'¥'+Math.round(n||0).toLocaleString('ja-JP');const WD=['日','月','火','水','木','金','土'];
 const pad=n=>String(n).padStart(2,'0');const today=(()=>{const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())})();
 const md=s=>{const d=new Date(s+'T00:00:00');return (d.getMonth()+1)+'月'+d.getDate()+'日('+WD[d.getDay()]+')'};
-const C=D.campaign||{};/* キャンペーン名から見た目を決める（お正月・節分・ひな祭り・母の日・土用の丑・お盆・敬老・秋・七五三・クリスマス） */
+const C=D.campaign||{};
+/* 注文をスプレッドシート「出前帳 受信注文」にも記録する送信先（Apps Script「出前帳 受信口」） */
+const ORDER_URL='https://script.google.com/macros/s/AKfycbzWME-qGWVFP3Xhe5LNiZbl7GSlE5c2klBWcl_qYq8LsRbEXgJsuFwIGXNAheNbz9cy/exec';
+const sentIds={};
+function sendSheet(oid,text){if(!ORDER_URL||sentIds[oid])return;sentIds[oid]=1;const body=JSON.stringify({id:oid,text:text,form:C.name||''});let ok=false;try{ok=navigator.sendBeacon(ORDER_URL,new Blob([body],{type:'text/plain;charset=utf-8'}))}catch(e){}if(!ok){try{fetch(ORDER_URL,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain;charset=utf-8'},body:body})}catch(e){}}}/* キャンペーン名から見た目を決める（お正月・節分・ひな祭り・母の日・土用の丑・お盆・敬老・秋・七五三・クリスマス） */
 /*THEMES-START*/
 const svgUrl=s=>`url("data:image/svg+xml,${encodeURIComponent(s)}")`;
 const PAT={
@@ -178,6 +184,7 @@ function bindExtras(){
     n.addEventListener('compositionend',()=>{if(kanaComp){kanaBuf+=kanaComp;kanaComp=''}putKana()});
     n.addEventListener('input',e=>{
       if(!n.value.trim()){kanaBuf='';putKana();return}
+if(/^[ぁ-ゖァ-ヺー\s　]+$/.test(n.value)){kanaBuf=n.value;putKana();return}
       if(!e.isComposing&&e.inputType==='insertText'&&e.data){const d=e.data;if(/^[\s　]+$/.test(d))kanaBuf+='　';else if(/^[ぁ-ゖァ-ヺー]+$/.test(d))kanaBuf+=d;putKana()}
       if(e.inputType&&e.inputType.startsWith('delete')&&n.value.length<2&&!n.value.trim()){kanaBuf='';putKana()}
     });
@@ -203,8 +210,8 @@ async function findAddress(){
 function updateBar(){const r=calc();$('#bar').hidden=false;$('#barTot').textContent=yen(r.tot);const nt=`${r.items.reduce((a,b)=>a+b.q,0)}点`+(r.rate?`・${Math.round(r.rate*100)}%割引後`:'')+'・税込';$('#barNote').textContent=nt;
   const sl=$('#sumList');if(sl){sl.innerHTML=r.items.length?r.items.map(i=>`<div style="display:flex;justify-content:space-between;gap:8px;color:var(--ink)"><span>${esc(i.m.name)}${Object.values(i.cb.opts).length?'<span class="note">（'+esc(Object.values(i.cb.opts).join('・'))+'）</span>':''}</span><span style="white-space:nowrap">×${i.q}</span></div>`).join(''):'まだ選ばれていません';$('#sumTot2').textContent=yen(r.tot);$('#sumNote2').textContent=nt}}
 function readInputs(){['name','kana','phone','zip','address','note','timeNote'].forEach(k=>{const el=$('#i_'+k);if(el)st[k]=el.value.trim()});save()}
-function message(r){const s=D.shop||{};
-  return [`【ご注文】${s.name||''} ${C.name||''}`.trim(),`■お名前：${st.name}${st.kana?`（${st.kana}）`:''}`,`■電話：${st.phone}`,`■受取：${st.method==='delivery'?'配送':'店頭引取'} ${md(st.date)} ${st.time||'時間おまかせ'}`,st.timeNote?`■時間の備考：${st.timeNote}`:'',
+function message(r,oid){const s=D.shop||{};
+  return [`【ご注文】${s.name||''} ${C.name||''}`.trim(),`■お名前：${st.name}${st.kana?`（${st.kana}）`:''}`,`■電話：${st.phone}`,oid?`■受付番号：${oid}`:'',`■受取：${st.method==='delivery'?'配送':'店頭引取'} ${md(st.date)} ${st.time||'時間おまかせ'}`,st.timeNote?`■時間の備考：${st.timeNote}`:'',
     st.method==='delivery'?`■お届け先：${st.zip?'〒'+fmtZip(st.zip)+' ':''}${st.address}`:'', '■ご注文：',...r.items.map(i=>`・${i.m.name}${Object.values(i.cb.opts).length?'［'+Object.values(i.cb.opts).join('・')+'］':''} ×${i.q}`),
     `■見込み合計：${yen(r.tot)}（税込${r.rate?`・${r.why}${Math.round(r.rate*100)}%割引後`:''}）`,st.note?`■ご要望：${st.note}`:'','（注文フォームより送信）'].filter(Boolean).join('\n')}
 function confirmView(){
@@ -213,7 +220,7 @@ function confirmView(){
   if(C.minOrder&&r.tot<C.minOrder)errs.push(`${yen(C.minOrder)}（税込）以上のご注文で承ります`);
   const box=$('#confirm');
   if(errs.length){box.innerHTML=`<div class="warn">${errs.map(esc).join('<br>')}</div>`;box.scrollIntoView({behavior:'smooth',block:'center'});return}
-  saveProfile();const text=message(r);const s=D.shop||{};const id=String(s.lineId||'').trim();
+  saveProfile();const oid='W'+Date.now().toString(36).toUpperCase()+Math.random().toString(36).slice(2,5).toUpperCase();const text=message(r,oid);const s=D.shop||{};const id=String(s.lineId||'').trim();
   const url=id?`https://line.me/R/oaMessage/${encodeURIComponent(id.startsWith('@')?id:'@'+id)}/?${encodeURIComponent(text)}`:`https://line.me/R/msg/text/?${encodeURIComponent(text)}`;
   box.innerHTML=`<section class="card"><h2>この内容でLINEから送ります</h2><div class="msg" id="msgText">${esc(text)}</div>
     <a class="btn line" href="${esc(url)}" target="_blank" rel="noopener">LINEで注文を送る</a>
@@ -223,7 +230,8 @@ function confirmView(){
     <div class="note">見込み合計は目安です。お店からの受付完了のご連絡で金額が確定します。</div>
     <div class="warn">送信後、${D.confirmPhrase?esc(D.confirmPhrase)+'に':''}お店から受付完了のご連絡がない場合は、お手数ですが${D.contactBack?esc(D.contactBack):'お電話またはLINEでお店にご連絡ください。'}</div></section>`;
   box.scrollIntoView({behavior:'smooth',block:'start'});
-  $('#copyBtn').onclick=async()=>{try{await navigator.clipboard.writeText(text);$('#copyBtn').textContent='コピーしました。LINEのトークに貼り付けて送ってください'}catch(e){const sel=getSelection(),rg=document.createRange();rg.selectNodeContents($('#msgText'));sel.removeAllRanges();sel.addRange(rg);$('#copyBtn').textContent='文面を選択しました。コピーしてLINEに貼り付けてください'}};
+const lb=box.querySelector('.btn.line');if(lb)lb.addEventListener('click',()=>sendSheet(oid,text));
+  $('#copyBtn').onclick=async()=>{sendSheet(oid,text);try{await navigator.clipboard.writeText(text);$('#copyBtn').textContent='コピーしました。LINEのトークに貼り付けて送ってください'}catch(e){const sel=getSelection(),rg=document.createRange();rg.selectNodeContents($('#msgText'));sel.removeAllRanges();sel.addRange(rg);$('#copyBtn').textContent='文面を選択しました。コピーしてLINEに貼り付けてください'}};
 }
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
   if(b.dataset.d){const k=b.dataset.k;st.qty[k]=Math.max(0,(+st.qty[k]||0)+(+b.dataset.d));const i=document.querySelector(`[data-q="${CSS.escape(k)}"]`);if(i)i.value=st.qty[k]||'';save();updateBar();return}
