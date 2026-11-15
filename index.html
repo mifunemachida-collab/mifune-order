@@ -1,4 +1,4 @@
-<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><title>お正月2027 ご注文フォーム｜魚河岸 美舟</title><meta name="description" content="魚河岸 美舟 お正月2027のご注文はこちらから。お届け・お持ち帰りどちらもご注文いただけます。"><meta property="og:type" content="website"><meta property="og:title" content="お正月2027 ご注文フォーム｜魚河岸 美舟"><meta property="og:description" content="魚河岸 美舟 お正月2027のご注文はこちらから。お届け・お持ち帰りどちらもご注文いただけます。"><meta property="og:site_name" content="魚河岸 美舟"></head><body>
+<!doctype html><html lang="ja"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"></head><body><title>お正月2027 ご注文フォーム｜魚河岸 美舟</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Zen+Kaku+Gothic+New:wght@400;500;700&family=Zen+Old+Mincho:wght@600;700&display=swap">
 <style>
@@ -10,8 +10,6 @@
 *{box-sizing:border-box}[hidden]{display:none!important}
 body{background:var(--bg);color:var(--ink);font-family:var(--f-b);font-size:15px;line-height:1.65;margin:0}
 button,input,select,textarea{font:inherit;color:inherit}
-/* iPhoneで入力欄をタップした時に画面が拡大しないよう、入力欄の文字は16px以上にします */
-input,select,textarea{font-size:16px}
 .wrap{max-width:1120px;margin:0 auto;padding-block:20px 150px;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));display:flex;flex-direction:column;gap:16px}
 header{position:relative;overflow:hidden;background:var(--hdr-bg,var(--ai));color:var(--hdr-ink,var(--ai-ink));border-radius:14px;padding:22px 20px;display:flex;flex-direction:column;gap:6px;isolation:isolate;box-shadow:inset 0 0 0 1px var(--hdr-line,transparent)}
 header::before{content:"";position:absolute;inset:0;background-image:var(--hdr-pat,none);background-size:var(--hdr-pat-size,48px 24px);opacity:var(--hdr-pat-op,.18);z-index:-1}
@@ -66,11 +64,28 @@ textarea{min-height:70px;resize:vertical}
   header{flex-direction:row;align-items:flex-end;justify-content:space-between;gap:20px}header ul{margin:0}
 }
 @media (pointer:coarse){.qty button{width:46px;height:46px}.chip{padding:9px 16px}}
+/* 見やすさ：文字をやや大きく・太く */
+body{font-size:17px;font-weight:700;line-height:1.7}
+h2{font-size:19px;font-weight:800}
+.note{font-size:14.5px;font-weight:600}
+label.f{font-size:15px;font-weight:700}
+input[type=text],input[type=tel],select,textarea{font-size:18px;font-weight:700}
+input::placeholder,textarea::placeholder{font-weight:500}
+.item .nm{font-size:18px}.item .nm span{font-weight:700}
+.chip{font-size:16.5px;font-weight:700}
+.seg button{font-size:16.5px;font-weight:700}
+.qty input{font-size:19px;font-weight:800}
+.btn{font-size:17px;font-weight:800}
+.info,.warn{font-size:15px;font-weight:600}
+.msg{font-size:15px;font-weight:600}
+.req{font-size:12.5px;font-weight:800}
+header .shop{font-size:14.5px;font-weight:700}header ul{font-size:15px;font-weight:600}header li.nb{list-style:none;margin-left:-18px;color:var(--hdr-sub,inherit)}header li.cxl{margin-top:4px;padding:6px 10px;border:1px solid var(--hdr-line,rgba(255,255,255,.5));border-radius:8px;list-style:none;margin-left:-18px;background:rgba(0,0,0,.12)}header h1{font-weight:700}
+.tot{font-size:24px;font-weight:800}
 </style>
 
 <div class="wrap" id="app"><div class="card"><h2>読み込み中</h2></div></div>
 <div class="bar" id="bar" hidden><div class="in"><div><div class="note" id="barNote"></div><div class="tot" id="barTot">¥0</div></div><button class="btn pri" id="toConfirm" type="button">内容を確認する</button></div></div>
-<script type="application/json" id="form-data">{"generatedAt":"2026-11-06T10:56:51.303Z","confirmText":"4日","confirmPhrase":"4日以内（営業日）","contactBack":"お電話（042-725-3296・平日9:00〜13:00）またはLINE（@811ythfh）でお店にご連絡ください。","shop":{"name":"魚河岸 美舟","tel":"042-725-3296","fax":"042-725-3296","address":"東京都町田市藤の台1-1-51-102（藤の台ショッピングセンター内）","lineId":"@811ythfh","telHours":"平日9:00〜13:00"},"campaign":{"name":"お正月2027","theme":"","earlyDeadline":"2026-12-20","earlyRate":10,"pickupRate":10,"minOrder":2000,"deliveryDates":["2027-01-01","2027-01-02","2027-01-03"],"pickupDates":["2026-12-31","2027-01-01","2027-01-02","2027-01-03"],"timeSlots":["10時","11時","12時","13時","14時","15時","16時","17時","18時"],"note":"店内引取のみ 12/31 17時以降（寿司以外の引取可）。交通事情により時間指定に添えない場合があります。"},"menu":[{"id":"tokujo","name":"特上寿し","price":3900,"unit":"人前","cat":"寿司","opts":["mori","wasabi"],"taxRate":"","priceMode":""},{"id":"jo","name":"上寿し","price":2400,"unit":"人前","cat":"寿司","opts":["mori","wasabi"],"taxRate":"","priceMode":""},{"id":"osechi","name":"おせち（2人前）","price":7700,"unit":"個","cat":"おせち・一品","opts":[],"taxRate":"","priceMode":""},{"id":"nishime","name":"お煮しめ","price":1000,"unit":"人前","cat":"おせち・一品","opts":[],"taxRate":"","priceMode":""},{"id":"tempura","name":"天ぷら七種盛り","price":1100,"unit":"人前","cat":"おせち・一品","opts":[],"taxRate":"","priceMode":""},{"id":"kanpyo","name":"かんぴょう巻","price":350,"unit":"本","cat":"巻物","opts":[],"taxRate":"","priceMode":""},{"id":"kappa","name":"かっぱ巻","price":350,"unit":"本","cat":"巻物","opts":["wasabi"],"taxRate":"","priceMode":""},{"id":"oshinko","name":"おしんこ巻","price":350,"unit":"本","cat":"巻物","opts":[],"taxRate":"","priceMode":""},{"id":"yamagobo","name":"山牛蒡巻","price":350,"unit":"本","cat":"巻物","opts":[],"taxRate":"","priceMode":""}],"optionGroups":{"mori":{"choices":["盛り合わせ","別盛り"],"label":"盛り方"},"wasabi":{"choices":["サビ有り","サビ抜き"],"label":"ワサビ"}},"tax":{"rate":8,"mode":"incl","round":"floor"}}</script>
+<script type="application/json" id="form-data">{"generatedAt":"2026-11-15T07:30:53.263Z","cancelText":"キャンセル・変更は12月25日(金)まで無料です。それ以降のキャンセルは、ご注文金額の全額（100%）をキャンセル料として頂戴します。","confirmText":"4日","confirmPhrase":"4日以内（営業日）","contactBack":"お電話（042-725-3296・平日9:00〜13:00）またはLINE（@811ythfh）でお店にご連絡ください。","shop":{"name":"魚河岸 美舟","tel":"042-725-3296","fax":"042-725-3296","address":"東京都町田市藤の台1-1-51-102（藤の台ショッピングセンター内）","lineId":"@811ythfh","telHours":"平日9:00〜13:00"},"campaign":{"name":"お正月2027","theme":"","earlyDeadline":"2026-12-20","earlyRate":10,"pickupRate":10,"minOrder":2000,"deliveryDates":["2027-01-01","2027-01-02","2027-01-03"],"pickupDates":["2026-12-31","2027-01-01","2027-01-02","2027-01-03"],"timeSlots":["10時","11時","12時","13時","14時","15時","16時","17時","18時"],"dateRules":{"2026-12-31":{"slots":["17時","18時"]}},"note":"店内引取のみ 12/31 17時以降（寿司以外の引取可）。交通事情により時間指定に添えない場合があります。"},"menu":[{"id":"tokujo","name":"特上寿し","price":3900,"unit":"人前","cat":"寿司","opts":["mori","wasabi"],"taxRate":"","priceMode":""},{"id":"jo","name":"上寿し","price":2400,"unit":"人前","cat":"寿司","opts":["mori","wasabi"],"taxRate":"","priceMode":""},{"id":"osechi","name":"おせち（2人前）","price":7700,"unit":"個","cat":"おせち・一品","opts":[],"taxRate":"","priceMode":""},{"id":"nishime","name":"お煮しめ","price":1000,"unit":"人前","cat":"おせち・一品","opts":[],"taxRate":"","priceMode":""},{"id":"tempura","name":"天ぷら七種盛り","price":1100,"unit":"人前","cat":"おせち・一品","opts":[],"taxRate":"","priceMode":""},{"id":"kanpyo","name":"かんぴょう巻","price":350,"unit":"本","cat":"巻物","opts":[],"taxRate":"","priceMode":""},{"id":"kappa","name":"かっぱ巻","price":350,"unit":"本","cat":"巻物","opts":["wasabi"],"taxRate":"","priceMode":""},{"id":"oshinko","name":"おしんこ巻","price":350,"unit":"本","cat":"巻物","opts":[],"taxRate":"","priceMode":""},{"id":"yamagobo","name":"山牛蒡巻","price":350,"unit":"本","cat":"巻物","opts":[],"taxRate":"","priceMode":""},{"id":"m_mwc8q2x1j5j4","name":"唐揚げ5個","price":700,"unit":"1人前","cat":"追加・その他","opts":[],"taxRate":"","priceMode":""}],"optionGroups":{"mori":{"choices":["盛り合わせ","別盛り"],"label":"盛り方"},"wasabi":{"choices":["サビ有り","サビ抜き"],"label":"ワサビ"}},"tax":{"rate":8,"mode":"incl","round":"floor","list":[{"name":"軽減税率","rate":8,"use":"テイクアウト・出前"},{"name":"標準税率","rate":10,"use":"店内飲食・酒類・容器代など"}]},"inbox":"","payMethods":[{"name":"現金払い","note":"お受け取りの時に現金でお支払いください"},{"name":"PayPay","note":"お受け取りの時にPayPayでお支払いください（店のQRコードを読み取ります）"}],"guard":{"maxQty":30,"daily":3}}</script>
 <script>
 (function(){
 let D;try{D=JSON.parse(document.getElementById('form-data').textContent)}catch(e){D=null}
@@ -79,11 +94,7 @@ const $=s=>document.querySelector(s);const esc=s=>String(s??'').replace(/[&<>"']
 const yen=n=>'¥'+Math.round(n||0).toLocaleString('ja-JP');const WD=['日','月','火','水','木','金','土'];
 const pad=n=>String(n).padStart(2,'0');const today=(()=>{const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())})();
 const md=s=>{const d=new Date(s+'T00:00:00');return (d.getMonth()+1)+'月'+d.getDate()+'日('+WD[d.getDay()]+')'};
-const C=D.campaign||{};
-/* 注文をスプレッドシート「出前帳 受信注文」にも記録する送信先（Apps Script「出前帳 受信口」） */
-const ORDER_URL='https://script.google.com/macros/s/AKfycbzWME-qGWVFP3Xhe5LNiZbl7GSlE5c2klBWcl_qYq8LsRbEXgJsuFwIGXNAheNbz9cy/exec';
-const sentIds={};
-function sendSheet(oid,text){if(!ORDER_URL||sentIds[oid])return;sentIds[oid]=1;const body=JSON.stringify({id:oid,text:text,form:C.name||''});let ok=false;try{ok=navigator.sendBeacon(ORDER_URL,new Blob([body],{type:'text/plain;charset=utf-8'}))}catch(e){}if(!ok){try{fetch(ORDER_URL,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain;charset=utf-8'},body:body})}catch(e){}}}/* キャンペーン名から見た目を決める（お正月・節分・ひな祭り・母の日・土用の丑・お盆・敬老・秋・七五三・クリスマス） */
+const C=D.campaign||{};/* キャンペーン名から見た目を決める（お正月・節分・ひな祭り・母の日・土用の丑・お盆・敬老・秋・七五三・クリスマス） */
 /*THEMES-START*/
 const svgUrl=s=>`url("data:image/svg+xml,${encodeURIComponent(s)}")`;
 const PAT={
@@ -128,8 +139,12 @@ document.title=[C.name,'ご注文フォーム'].filter(Boolean).join(' ')+((D.sh
 const PREF='北海道 青森県 岩手県 宮城県 秋田県 山形県 福島県 茨城県 栃木県 群馬県 埼玉県 千葉県 東京都 神奈川県 新潟県 富山県 石川県 福井県 山梨県 長野県 岐阜県 静岡県 愛知県 三重県 滋賀県 京都府 大阪府 兵庫県 奈良県 和歌山県 鳥取県 島根県 岡山県 広島県 山口県 徳島県 香川県 愛媛県 高知県 福岡県 佐賀県 長崎県 熊本県 大分県 宮崎県 鹿児島県 沖縄県'.split(' ');
 const toHalf=s=>String(s||'').replace(/[０-９]/g,c=>String.fromCharCode(c.charCodeAt(0)-0xFEE0));
 const toKata=s=>String(s||'').replace(/[ぁ-ゖ]/g,c=>String.fromCharCode(c.charCodeAt(0)+0x60));const T=Object.assign({rate:8,mode:'incl',round:'floor'},D.tax||{});
-const st={qty:{},method:(C.deliveryDates||[]).length?'delivery':'pickup',date:'',time:'',name:'',kana:'',phone:'',zip:'',address:'',note:'',timeNote:'',kanaManual:false};
+const st={qty:{},method:(C.deliveryDates||[]).length?'delivery':'pickup',date:'',time:'',name:'',kana:'',phone:'',zip:'',address:'',note:'',timeNote:'',pay:'',kanaManual:false};
+if((D.payMethods||[]).length===1)st.pay=D.payMethods[0].name;
 try{const sv=JSON.parse(localStorage.getItem('order-form-draft')||'null');if(sv&&sv.v===D.generatedAt)Object.assign(st,sv.st)}catch(e){}
+const T0=Date.now();const G=Object.assign({maxQty:30,daily:3},D.guard||{});
+const sentToday=()=>{try{const v=JSON.parse(localStorage.getItem('order-form-sent')||'null');return v&&v.d===today?v.n:0}catch(e){return 0}};
+const markSent=()=>{try{localStorage.setItem('order-form-sent',JSON.stringify({d:today,n:sentToday()+1,ids:[...(JSON.parse(localStorage.getItem('order-form-sent')||'{}').ids||[]),st.oid].slice(-10)}))}catch(e){}};
 const save=()=>{try{localStorage.setItem('order-form-draft',JSON.stringify({v:D.generatedAt,st}))}catch(e){}};
 /* 前回のお客様情報（お名前・電話・住所）をこの端末に覚えておき、次回は自動で入れます */
 const PROF=['name','kana','phone','zip','address'];let profUsed=false;
@@ -148,24 +163,29 @@ function calc(){
   return{items,sub,tot,rate,why}
 }
 function dates(){return (st.method==='delivery'?C.deliveryDates:C.pickupDates)||[]}
+function daySlots(d){const M=C.timeSlots||[];const r=(C.dateRules||{})[d];if(!r||!Array.isArray(r.slots)||!r.slots.length)return M;const L=M.filter(t=>r.slots.includes(t));return L.length?L:M}
+function dayRange(d){const M=C.timeSlots||[];const L=daySlots(d);if(!L.length||L.length>=M.length)return'';const i0=M.indexOf(L[0]),i1=M.indexOf(L[L.length-1]);const ct=i1-i0+1===L.length;return ct&&i1===M.length-1?L[0]+'以降':ct&&i0===0?L[L.length-1]+'まで':ct?L[0]+'〜'+L[L.length-1]:L.join('・')}
+function dayText(d){const r=(C.dateRules||{})[d];const t=dayRange(d);const n=r&&r.note?String(r.note).trim():'';const L=md(d);return t?`${L}のお受け取りは${t}です。${n?n+'。':''}`:n?`${L}：${n}。`:''}
 function render(){
   const cats=[...new Set(D.menu.map(m=>m.cat||'メニュー'))];
   const s=D.shop||{};const r=calc();
   $('#app').innerHTML=`<header>${TH.deco?`<div class="hero-deco" aria-hidden="true">${TH.deco}</div>`:''}<div class="shop">${esc(s.name)}${TH.sub2?'　'+esc(TH.sub2):''}</div><h1>${esc(C.name||'ご注文')}<small>ご注文フォーム</small></h1>
-    <ul>${C.earlyDeadline&&C.earlyRate?`<li>${md(C.earlyDeadline)}までのご注文で${C.earlyRate}%割引</li>`:''}${C.pickupRate?`<li>店頭でのお引き取りは${C.pickupRate}%割引</li>`:''}${C.earlyDeadline&&C.earlyRate&&C.pickupRate?`<li>※両方に当てはまる場合も割引は${Math.max(C.earlyRate,C.pickupRate)}%です（${C.earlyRate+C.pickupRate}%にはなりません）</li>`:''}${C.minOrder?`<li>${yen(C.minOrder)}（税込）から承ります</li>`:''}${C.note?`<li>${esc(C.note)}</li>`:''}${s.tel?`<li>お電話（${esc(s.tel)}${s.telHours?'・'+esc(s.telHours):''}）${s.fax?`・FAX（${esc(s.fax)}）`:''}でもご注文いただけます</li>`:''}</ul></header>
+    <ul>${C.earlyDeadline&&C.earlyRate&&today<=C.earlyDeadline?`<li>${md(C.earlyDeadline)}までのご注文で${C.earlyRate}%割引</li>`:''}${C.pickupRate?`<li>店頭でのお引き取りは${C.pickupRate}%割引</li>`:''}${C.earlyDeadline&&C.earlyRate&&C.pickupRate&&today<=C.earlyDeadline?`<li class="nb">※割引は重ねられません。${md(C.earlyDeadline)}までのご注文で店頭お引き取りの場合も、割引は${Math.max(C.earlyRate,C.pickupRate)}%です（${C.earlyRate}%＋${C.pickupRate}%＝${C.earlyRate+C.pickupRate}%にはなりません）。</li>`:''}${C.minOrder?`<li>${yen(C.minOrder)}（税込）から承ります</li>`:''}${C.note?`<li>${esc(C.note)}</li>`:''}${D.cancelText?`<li class="cxl"><b>変更・キャンセルについて：</b>${esc(D.cancelText)}</li>`:''}${s.tel?`<li>お電話（${esc(s.tel)}${s.telHours?'・'+esc(s.telHours):''}）${s.fax?`・FAX（${esc(s.fax)}）`:''}でもご注文いただけます</li>`:''}</ul></header>
   <div class="cols"><div class="col-main">${cats.map(cat=>`<section class="card"><h2>${esc(cat)}</h2>${D.menu.filter(m=>(m.cat||'メニュー')===cat).map(m=>`<div class="item"><div class="nm">${esc(m.name)}<span>${yen(m.price)}/${esc(m.unit||'')}${m.priceMode==='excl'||(!m.priceMode&&T.mode==='excl')?'（税別）':''}</span></div>
     <div class="combo">${combos(m).map(cb=>`<span class="note">${esc(Object.values(cb.opts).join('・')||'数量')}</span><div class="qty"><button type="button" data-d="-1" data-k="${esc(cb.key)}" aria-label="減らす">−</button><input inputmode="numeric" data-q="${esc(cb.key)}" value="${+st.qty[cb.key]||''}" aria-label="${esc(m.name)} ${esc(Object.values(cb.opts).join('・'))}の数"><button type="button" data-d="1" data-k="${esc(cb.key)}" aria-label="増やす">＋</button></div>`).join('')}</div></div>`).join('')}</section>`).join('')}
   </div><aside class="col-side"><section class="card"><h2>お受け取り</h2>
     <div class="seg">${(C.deliveryDates||[]).length?`<button type="button" data-m="delivery" class="${st.method==='delivery'?'on':''}">お届け（出前）</button>`:''}${(C.pickupDates||[]).length?`<button type="button" data-m="pickup" class="${st.method==='pickup'?'on':''}">店頭でお引き取り</button>`:''}</div>
-    <div><div class="note">日にち<span class="req">必須</span></div><div class="chips">${dates().map(d=>`<button type="button" class="chip ${st.date===d?'on':''}" data-date="${d}">${md(d)}</button>`).join('')||'<span class="note">お店にご相談ください</span>'}</div></div>
-    <div><div class="note">ご希望の時間</div><div class="chips">${(C.timeSlots||[]).map(t=>`<button type="button" class="chip ${st.time===t?'on':''}" data-time="${esc(t)}">${esc(t)}</button>`).join('')}</div>
+    <div><div class="note">日にち<span class="req">必須</span></div><div class="chips">${dates().map(d=>`<button type="button" class="chip ${st.date===d?'on':''}" data-date="${d}">${md(d)}${dayRange(d)?`<small style="display:block;font-size:12px;font-weight:700;color:inherit;opacity:.9">${esc(dayRange(d))}</small>`:''}</button>`).join('')||'<span class="note">お店にご相談ください</span>'}</div></div>
+    <div><div class="note">ご希望の時間</div>${st.date&&dayText(st.date)?`<div class="info" style="margin:4px 0 8px;font-weight:700">※${esc(dayText(st.date))}</div>`:''}<div class="chips">${(st.date?daySlots(st.date):(C.timeSlots||[])).map(t=>`<button type="button" class="chip ${st.time===t?'on':''}" data-time="${esc(t)}">${esc(t)}</button>`).join('')}</div>
       <label class="f" style="margin-top:8px"><span>時間の備考<span class="note" style="margin-left:6px">例：11時半ごろ希望／午前中ならいつでも</span></span><input type="text" id="i_timeNote" value="${esc(st.timeNote||'')}" placeholder="ご希望があればご記入ください"></label></div></section>
+  ${(D.payMethods||[]).length?`<section class="card"><h2>お支払い方法<span class="req">必須</span></h2><div class="chips">${D.payMethods.map(p=>`<button type="button" class="chip ${st.pay===p.name?'on':''}" data-pay="${esc(p.name)}">${esc(p.name)}</button>`).join('')}</div>${(()=>{const p=D.payMethods.find(x=>x.name===st.pay);return p&&p.note?`<div class="note" style="margin-top:6px">${esc(p.note)}</div>`:''})()}</section>`:''}
   <section class="card"><h2>お客様情報</h2>${profUsed?`<div class="info" style="padding:8px 12px;font-size:12.5px">前回の内容を入れました。違う方のご注文は <button type="button" class="linkb" id="clearProf">消して入れ直す</button></div>`:''}
+    <div aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden"><label>会社名（入力しないでください）<input type="text" id="i_hp" tabindex="-1" autocomplete="off"></label></div>
     <label class="f"><span>お名前<span class="req">必須</span></span><input type="text" id="i_name" autocomplete="name" value="${esc(st.name)}"></label>
     <label class="f"><span>フリガナ<span class="note" style="margin-left:6px">お名前から自動で入ります（直せます）</span></span><input type="text" id="i_kana" value="${esc(st.kana)}"></label>
-    <label class="f"><span>電話番号<span class="req">必須</span></span><input type="tel" id="i_phone" autocomplete="tel" value="${esc(st.phone)}"></label>
-    ${st.method==='delivery'?`<div class="f" style="display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)">郵便番号<div style="display:flex;gap:8px"><input type="text" id="i_zip" inputmode="numeric" autocomplete="postal-code" value="${esc(st.zip)}" placeholder="例 194-0039" style="max-width:160px"><button type="button" class="btn" id="zipBtn">住所を検索</button></div><span class="note" id="zipMsg">7桁を入れると住所が自動で入ります</span></div>
-    <label class="f"><span>お届け先のご住所<span class="req">必須</span></span><input type="text" id="i_address" autocomplete="street-address" value="${esc(st.address)}" placeholder="番地・建物名・部屋番号まで"></label>`:''}
+    <label class="f"><span>電話番号<span class="req">必須</span></span><input type="tel" id="i_phone" autocomplete="tel" inputmode="tel" placeholder="例：090-1234-5678（日中つながる番号）" value="${esc(st.phone)}"></label>
+    <div class="f" style="display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)">郵便番号<div style="display:flex;gap:8px"><input type="text" id="i_zip" inputmode="numeric" autocomplete="postal-code" value="${esc(st.zip)}" placeholder="例 194-0039" style="max-width:160px"><button type="button" class="btn" id="zipBtn">住所を検索</button></div><span class="note" id="zipMsg">7桁を入れると住所が自動で入ります</span></div>
+    <label class="f"><span>${st.method==='delivery'?'お届け先のご住所':'ご住所'}<span class="req">必須</span></span><input type="text" id="i_address" autocomplete="street-address" value="${esc(st.address)}" placeholder="番地・建物名・部屋番号まで"></label>
     <label class="f">ご要望（アレルギー・お皿の分け方など）<textarea id="i_note">${esc(st.note)}</textarea></label></section>
   <div class="info">ご注文はLINEでお店に届きます。お店から<b>受付完了のご連絡</b>をLINEでお送りして、ご注文が確定します。${D.confirmPhrase?`${D.confirmPhrase}にご連絡がない場合は、`:D.confirmText?`${D.confirmText}以内（営業時間内）にご連絡がない場合は、`:D.confirmHours?`${D.confirmHours}時間以内（営業時間内）にご連絡がない場合は、`:'ご連絡がない場合は、'}お手数ですが${D.contactBack?esc(D.contactBack):`お電話（${esc(s.tel||'')}）${s.lineId?'またはLINE（'+esc(s.lineId)+'）':'またはLINE'}でお店にご連絡ください。`}</div>
   <section class="card sum-card"><h2>ご注文内容</h2><div id="sumList" class="note">まだ選ばれていません</div><div style="display:flex;justify-content:space-between;align-items:baseline"><span class="note" id="sumNote2"></span><span class="tot" id="sumTot2">¥0</span></div><button class="btn pri" id="toConfirm2" type="button">内容を確認する</button></section>
@@ -184,7 +204,6 @@ function bindExtras(){
     n.addEventListener('compositionend',()=>{if(kanaComp){kanaBuf+=kanaComp;kanaComp=''}putKana()});
     n.addEventListener('input',e=>{
       if(!n.value.trim()){kanaBuf='';putKana();return}
-if(/^[ぁ-ゖァ-ヺー\s　]+$/.test(n.value)){kanaBuf=n.value;putKana();return}
       if(!e.isComposing&&e.inputType==='insertText'&&e.data){const d=e.data;if(/^[\s　]+$/.test(d))kanaBuf+='　';else if(/^[ぁ-ゖァ-ヺー]+$/.test(d))kanaBuf+=d;putKana()}
       if(e.inputType&&e.inputType.startsWith('delete')&&n.value.length<2&&!n.value.trim()){kanaBuf='';putKana()}
     });
@@ -210,33 +229,44 @@ async function findAddress(){
 function updateBar(){const r=calc();$('#bar').hidden=false;$('#barTot').textContent=yen(r.tot);const nt=`${r.items.reduce((a,b)=>a+b.q,0)}点`+(r.rate?`・${Math.round(r.rate*100)}%割引後`:'')+'・税込';$('#barNote').textContent=nt;
   const sl=$('#sumList');if(sl){sl.innerHTML=r.items.length?r.items.map(i=>`<div style="display:flex;justify-content:space-between;gap:8px;color:var(--ink)"><span>${esc(i.m.name)}${Object.values(i.cb.opts).length?'<span class="note">（'+esc(Object.values(i.cb.opts).join('・'))+'）</span>':''}</span><span style="white-space:nowrap">×${i.q}</span></div>`).join(''):'まだ選ばれていません';$('#sumTot2').textContent=yen(r.tot);$('#sumNote2').textContent=nt}}
 function readInputs(){['name','kana','phone','zip','address','note','timeNote'].forEach(k=>{const el=$('#i_'+k);if(el)st[k]=el.value.trim()});save()}
-function message(r,oid){const s=D.shop||{};
-  return [`【ご注文】${s.name||''} ${C.name||''}`.trim(),`■お名前：${st.name}${st.kana?`（${st.kana}）`:''}`,`■電話：${st.phone}`,oid?`■受付番号：${oid}`:'',`■受取：${st.method==='delivery'?'配送':'店頭引取'} ${md(st.date)} ${st.time||'時間おまかせ'}`,st.timeNote?`■時間の備考：${st.timeNote}`:'',
-    st.method==='delivery'?`■お届け先：${st.zip?'〒'+fmtZip(st.zip)+' ':''}${st.address}`:'', '■ご注文：',...r.items.map(i=>`・${i.m.name}${Object.values(i.cb.opts).length?'［'+Object.values(i.cb.opts).join('・')+'］':''} ×${i.q}`),
-    `■見込み合計：${yen(r.tot)}（税込${r.rate?`・${r.why}${Math.round(r.rate*100)}%割引後`:''}）`,st.note?`■ご要望：${st.note}`:'','（注文フォームより送信）'].filter(Boolean).join('\n')}
+function message(r){const s=D.shop||{};
+  return [`【ご注文】${s.name||''} ${C.name||''}`.trim(),`■お名前：${st.name}${st.kana?`（${st.kana}）`:''}`,`■電話：${st.phone}`,`■受取：${st.method==='delivery'?'配送':'店頭引取'} ${md(st.date)} ${st.time||'時間おまかせ'}`,st.timeNote?`■時間の備考：${st.timeNote}`:'',
+    `${st.method==='delivery'?'■お届け先：':'■ご住所：'}${st.zip?'〒'+fmtZip(st.zip)+' ':''}${st.address}`, '■ご注文：',...r.items.map(i=>`・${i.m.name}${Object.values(i.cb.opts).length?'［'+Object.values(i.cb.opts).join('・')+'］':''} ×${i.q}`),
+    `■見込み合計：${yen(r.tot)}（税込${r.rate?`・${r.why}${Math.round(r.rate*100)}%割引後`:''}）`,st.pay?`■お支払い：${st.pay}`:'',st.note?`■ご要望：${st.note}`:'',`■送信日：${today.slice(0,4)}年${+today.slice(5,7)}月${+today.slice(8,10)}日`,st.oid?`■受付番号：${st.oid}`:'','（注文フォームより送信）'].filter(Boolean).join('\n')}
+/* 注文をお店の受信用スプレッドシートにも届けます（LINEの送信とは別。失敗してもLINEの注文には影響しません） */
+const sentIds=new Set();
+function sendInbox(text){const u=String(D.inbox||'');if(!/^https:\/\/script\.google\.com\//.test(u)||!st.oid||sentIds.has(st.oid))return;sentIds.add(st.oid);
+  try{fetch(u,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain;charset=utf-8'},body:JSON.stringify({id:st.oid,text,form:C.name||''})}).catch(()=>{})}catch(e){}}
 function confirmView(){
   readInputs();const r=calc();const errs=[];
-  if(!r.items.length)errs.push('ご注文の数量を入れてください');if(!st.date)errs.push('お受け取りの日にちを選んでください');if(!st.name)errs.push('お名前を入れてください');if(!st.phone)errs.push('電話番号を入れてください');if(st.method==='delivery'&&!st.address)errs.push('お届け先のご住所を入れてください');
+  if(!r.items.length)errs.push('ご注文の数量を入れてください');if(!st.date)errs.push('お受け取りの日にちを選んでください');if(!st.name)errs.push('お名前を入れてください');if(!st.phone)errs.push('電話番号を入れてください');else{const pd=toHalf(st.phone).replace(/\D/g,'');if(!/^0\d{9,10}$/.test(pd))errs.push('電話番号は市外局番から10桁か11桁で入れてください（例：090-1234-5678）')}if(!st.address)errs.push(st.method==='delivery'?'お届け先のご住所を入れてください':'ご住所を入れてください');if((D.payMethods||[]).length&&!st.pay)errs.push('お支払い方法を選んでください');
+  {const hp=$('#i_hp');if(hp&&hp.value.trim())errs.push('送信できませんでした。お手数ですがお電話でご注文ください。')}
+  if(Date.now()-T0<6000)errs.push('入力内容をもう一度ご確認のうえ、「内容を確認する」を押してください。');
+  {const over=r.items.filter(i=>i.q>G.maxQty);if(over.length)errs.push(`1品目${G.maxQty}点を超えるご注文は、お電話（${(D.shop||{}).tel||'お店'}）で承ります（${over.map(i=>i.m.name).join('、')}）`)}
+  if(G.daily&&sentToday()>=G.daily)errs.push(`この端末からの本日のご注文は${G.daily}回までです。追加のご注文はお電話（${(D.shop||{}).tel||'お店'}）でお願いいたします。`);
   if(C.minOrder&&r.tot<C.minOrder)errs.push(`${yen(C.minOrder)}（税込）以上のご注文で承ります`);
   const box=$('#confirm');
   if(errs.length){box.innerHTML=`<div class="warn">${errs.map(esc).join('<br>')}</div>`;box.scrollIntoView({behavior:'smooth',block:'center'});return}
-  saveProfile();const oid='W'+Date.now().toString(36).toUpperCase()+Math.random().toString(36).slice(2,5).toUpperCase();const text=message(r,oid);const s=D.shop||{};const id=String(s.lineId||'').trim();
+  saveProfile();const sig=JSON.stringify([st.qty,st.method,st.date,st.time,st.name,st.phone,st.address,st.note,st.timeNote,st.pay]);if(!st.oid||st.oidSig!==sig){st.oid='w'+Date.now().toString(36)+Math.random().toString(36).slice(2,6);st.oidSig=sig;save()}const text=message(r);const s=D.shop||{};const id=String(s.lineId||'').trim();
   const url=id?`https://line.me/R/oaMessage/${encodeURIComponent(id.startsWith('@')?id:'@'+id)}/?${encodeURIComponent(text)}`:`https://line.me/R/msg/text/?${encodeURIComponent(text)}`;
   box.innerHTML=`<section class="card"><h2>この内容でLINEから送ります</h2><div class="msg" id="msgText">${esc(text)}</div>
-    <a class="btn line" href="${esc(url)}" target="_blank" rel="noopener">LINEで注文を送る</a>
+    <a class="btn line" id="lineBtn" href="${esc(url)}" target="_blank" rel="noopener">LINEで注文を送る</a>
     ${id?'':'<div class="note">LINEが開いたら、送り先に「'+esc(s.name||'お店')+'」のトークを選んでください。</div>'}
     <button type="button" class="btn" id="copyBtn">文面をコピーする（LINEが開かない時）</button>
     <div class="note">パソコン・iPadでLINEが開かない時は、文面をコピーしてLINEのトークに貼り付けて送ってください。${s.tel?`お電話（<a href="tel:${esc(String(s.tel).replace(/[^0-9+]/g,''))}">${esc(s.tel)}</a>${s.telHours?'・'+esc(s.telHours):''}）${s.fax?`・FAX（${esc(s.fax)}）`:''}でも承ります。`:''}</div>
     <div class="note">見込み合計は目安です。お店からの受付完了のご連絡で金額が確定します。</div>
+    <div class="note">いたずら・虚偽のご注文はお断りします。初めてのお客様や大口のご注文は、お店からお電話で内容を確認してから確定する場合があります。</div>
+    ${D.cancelText?`<div class="info" style="margin-bottom:8px"><b>変更・キャンセルについて</b><br>${esc(D.cancelText)}</div>`:''}
     <div class="warn">送信後、${D.confirmPhrase?esc(D.confirmPhrase)+'に':''}お店から受付完了のご連絡がない場合は、お手数ですが${D.contactBack?esc(D.contactBack):'お電話またはLINEでお店にご連絡ください。'}</div></section>`;
   box.scrollIntoView({behavior:'smooth',block:'start'});
-const lb=box.querySelector('.btn.line');if(lb)lb.addEventListener('click',()=>sendSheet(oid,text));
-  $('#copyBtn').onclick=async()=>{sendSheet(oid,text);try{await navigator.clipboard.writeText(text);$('#copyBtn').textContent='コピーしました。LINEのトークに貼り付けて送ってください'}catch(e){const sel=getSelection(),rg=document.createRange();rg.selectNodeContents($('#msgText'));sel.removeAllRanges();sel.addRange(rg);$('#copyBtn').textContent='文面を選択しました。コピーしてLINEに貼り付けてください'}};
+  const once=()=>{if(!once.d){once.d=1;markSent()}};const lb=$('#lineBtn');if(lb)lb.addEventListener('click',()=>{sendInbox(text);once()});
+  $('#copyBtn').onclick=async()=>{sendInbox(text);once();try{await navigator.clipboard.writeText(text);$('#copyBtn').textContent='コピーしました。LINEのトークに貼り付けて送ってください'}catch(e){const sel=getSelection(),rg=document.createRange();rg.selectNodeContents($('#msgText'));sel.removeAllRanges();sel.addRange(rg);$('#copyBtn').textContent='文面を選択しました。コピーしてLINEに貼り付けてください'}};
 }
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
   if(b.dataset.d){const k=b.dataset.k;st.qty[k]=Math.max(0,(+st.qty[k]||0)+(+b.dataset.d));const i=document.querySelector(`[data-q="${CSS.escape(k)}"]`);if(i)i.value=st.qty[k]||'';save();updateBar();return}
-  if(b.dataset.m){readInputs();st.method=b.dataset.m;if(!dates().includes(st.date))st.date='';save();render();return}
-  if(b.dataset.date){readInputs();st.date=b.dataset.date;save();render();return}
+  if(b.dataset.m){readInputs();st.method=b.dataset.m;if(!dates().includes(st.date))st.date='';if(st.date&&st.time&&!daySlots(st.date).includes(st.time))st.time='';save();render();return}
+  if(b.dataset.pay!==undefined){readInputs();st.pay=b.dataset.pay;save();render();return}
+  if(b.dataset.date){readInputs();st.date=b.dataset.date;if(st.time&&!daySlots(st.date).includes(st.time))st.time='';save();render();return}
   if(b.dataset.time){readInputs();st.time=st.time===b.dataset.time?'':b.dataset.time;save();render();return}
   if(b.id==='toConfirm'||b.id==='toConfirm2')confirmView();
   if(b.id==='clearProf')clearProfile();
