@@ -196,7 +196,7 @@ function dates(){return (st.method==='delivery'?C.deliveryDates:C.pickupDates)||
 function daySlots(d){const M=C.timeSlots||[];const r=(C.dateRules||{})[d];if(!r||!Array.isArray(r.slots)||!r.slots.length)return M;const L=M.filter(t=>r.slots.includes(t));return L.length?L:M}
 function dayRange(d){const M=C.timeSlots||[];const L=daySlots(d);if(!L.length||L.length>=M.length)return'';const i0=M.indexOf(L[0]),i1=M.indexOf(L[L.length-1]);const ct=i1-i0+1===L.length;return ct&&i1===M.length-1?L[0]+'以降':ct&&i0===0?L[L.length-1]+'まで':ct?L[0]+'〜'+L[L.length-1]:L.join('・')}
 function dayText(d){const r=(C.dateRules||{})[d];const t=dayRange(d);const n=r&&r.note?String(r.note).trim():'';const L=md(d);return t?`${L}のお受け取りは${t}です。${n?n+'。':''}`:n?`${L}：${n}。`:''}
-function render(){
+function render(){const __q=()=>[...document.querySelectorAll('.col-side,.col-main')];const __sv=__q().map(e=>e.scrollTop),__y=window.scrollY;__rd();__q().forEach((e,i)=>{if(__sv[i])e.scrollTop=__sv[i]});if(window.scrollY!==__y)window.scrollTo(0,__y)}function __rd(){
   const cats=[...new Set(D.menu.filter(m=>!m.hidden).map(m=>m.cat||'メニュー'))];
   const s=D.shop||{};const r=calc();
   $('#app').innerHTML=`<header>${TH.deco?`<div class="hero-deco" aria-hidden="true">${TH.deco}</div>`:''}<div class="shop">${esc(s.name)}${TH.sub2?'　'+esc(TH.sub2):''}</div><h1>${esc(C.name||'ご注文')}<small>ご注文フォーム</small></h1>
