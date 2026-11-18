@@ -46,6 +46,13 @@ textarea{min-height:70px;resize:vertical}
 .seg button:last-child{border-right:0}.seg button.on{background:var(--ai);color:var(--ai-ink);font-weight:700}
 .chips{display:flex;flex-wrap:wrap;gap:6px}
 .chip{border:1px solid var(--line);background:var(--surface);border-radius:20px;padding:6px 14px;cursor:pointer}
+.cal{border:1px solid var(--line);border-radius:12px;padding:10px;margin-top:4px}.cal-h{display:flex;align-items:center;justify-content:space-between;margin-bottom:6px}.cal-h b{font-size:16px}
+.cal-nv{width:40px;height:36px;border:1px solid var(--line);background:var(--surface);border-radius:8px;font-size:20px;cursor:pointer;color:var(--ink)}.cal-nv:disabled{opacity:.3;cursor:default}
+.cal-g{display:grid;grid-template-columns:repeat(7,1fr);gap:4px;text-align:center}.cw{font-size:12px;color:var(--muted);font-weight:700}
+.cd{min-height:44px;border-radius:8px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;line-height:1.1}
+button.cd{border:1px solid var(--ai);background:var(--ai-soft,#eef3f9);color:var(--ink);cursor:pointer}button.cd.on{background:var(--ai);color:var(--ai-ink)}
+.cd.off{color:var(--muted);opacity:.45;font-weight:500}.cd i{font-style:normal;font-size:10px;font-weight:700;margin-top:2px}
+.cd.sun:not(.on){color:#c0392b}.cd.sat:not(.on){color:#2a62b8}.cw.sun{color:#c0392b}.cw.sat{color:#2a62b8}.cd.td{text-decoration:underline}
 .chip.on{background:var(--ai);color:var(--ai-ink);border-color:var(--ai)}
 .req{color:var(--shu);font-size:11px;margin-left:4px}
 .bar{position:fixed;left:0;right:0;bottom:0;background:var(--surface);border-top:1px solid var(--line);padding:12px max(16px,env(safe-area-inset-right,0px)) calc(12px + env(safe-area-inset-bottom,0px)) max(16px,env(safe-area-inset-left,0px));box-shadow:0 -6px 20px rgba(0,0,0,.08)}
@@ -177,6 +184,14 @@ function calc(){
 }
 const NO_M='123456789XYZ',NO_D='123456789ABCDEFGHJKLMNPQRSTUVWX',NO_T='0123456789ABCDEFGHJKLMNPQRSTUVWXYZ';
 function makeNo(){const d=new Date();const b=Math.floor((d.getHours()*60+d.getMinutes())/2);return (d.getFullYear()%10)+NO_M[d.getMonth()]+NO_D[d.getDate()-1]+NO_T[Math.floor(b/34)]+NO_T[b%34]}
+function calHtml(){const L=dates();if(!L.length)return'<span class="note">お店にご相談ください</span>';const ok=new Set(L);
+  const ms=[...new Set(L.map(d=>d.slice(0,7)))];if(st.calM==null||st.calM>=ms.length){const k=st.date&&ms.indexOf(st.date.slice(0,7));st.calM=k>0?k:0}
+  const ym=ms[st.calM];const[y,mo]=ym.split('-').map(Number);const first=new Date(y,mo-1,1).getDay();const n=new Date(y,mo,0).getDate();
+  let c='';for(let i=0;i<first;i++)c+='<span></span>';
+  for(let d=1;d<=n;d++){const ds=ym+'-'+pad(d);const w=(first+d-1)%7;const cls=(w===0?' sun':w===6?' sat':'')+(ds===today?' td':'');
+    c+=ok.has(ds)?`<button type="button" class="cd${cls}${st.date===ds?' on':''}" data-date="${ds}" aria-label="${md(ds)}">${d}${dayRange(ds)?'<i>'+esc(dayRange(ds))+'</i>':ds===today?'<i>今日</i>':''}</button>`:`<span class="cd off${cls}">${d}</span>`}
+  return`<div class="cal"><div class="cal-h"><button type="button" class="cal-nv" data-calm="${st.calM-1}" ${st.calM>0?'':'disabled'} aria-label="前の月">‹</button><b>${y}年${mo}月</b><button type="button" class="cal-nv" data-calm="${st.calM+1}" ${st.calM<ms.length-1?'':'disabled'} aria-label="次の月">›</button></div>
+  <div class="cal-g">${['日','月','火','水','木','金','土'].map((w,i)=>`<span class="cw${i===0?' sun':i===6?' sat':''}">${w}</span>`).join('')}${c}</div>${st.date?`<div class="note" style="margin-top:6px">選んだ日：<b style="color:var(--ink)">${md(st.date)}</b></div>`:'<div class="note" style="margin-top:6px">色の付いた日から選べます</div>'}</div>`}
 function dates(){return (st.method==='delivery'?C.deliveryDates:C.pickupDates)||[]}
 function daySlots(d){const M=C.timeSlots||[];const r=(C.dateRules||{})[d];if(!r||!Array.isArray(r.slots)||!r.slots.length)return M;const L=M.filter(t=>r.slots.includes(t));return L.length?L:M}
 function dayRange(d){const M=C.timeSlots||[];const L=daySlots(d);if(!L.length||L.length>=M.length)return'';const i0=M.indexOf(L[0]),i1=M.indexOf(L[L.length-1]);const ct=i1-i0+1===L.length;return ct&&i1===M.length-1?L[0]+'以降':ct&&i0===0?L[L.length-1]+'まで':ct?L[0]+'〜'+L[L.length-1]:L.join('・')}
@@ -190,7 +205,7 @@ function render(){
     <div class="combo">${combos(m).map(cb=>`<span class="note">${esc(Object.values(cb.opts).join('・')||'数量')}</span><div class="qty"><button type="button" data-d="-1" data-k="${esc(cb.key)}" aria-label="減らす">−</button><input inputmode="numeric" data-q="${esc(cb.key)}" value="${+st.qty[cb.key]||''}" aria-label="${esc(m.name)} ${esc(Object.values(cb.opts).join('・'))}の数"><button type="button" data-d="1" data-k="${esc(cb.key)}" aria-label="増やす">＋</button></div>`).join('')}</div></div>${addKeys(m).length?`<details class="adds"${addKeys(m).some(a=>+st.qty[m.id+'+'+a.id])?' open':''}><summary>大盛り・おかず増</summary><div class="combo">${addKeys(m).map(a=>{const k=m.id+'+'+a.id;return`<span class="note"><b>${esc(a.name)}</b>${a.note?' '+esc(a.note):''}<br>＋${yen(a.price).slice(1)}円</span><div class="qty"><button type="button" data-d="-1" data-k="${esc(k)}" aria-label="減らす">−</button><input inputmode="numeric" data-q="${esc(k)}" value="${+st.qty[k]||''}" aria-label="${esc(m.name)}の${esc(a.name)}の数"><button type="button" data-d="1" data-k="${esc(k)}" aria-label="増やす">＋</button></div>`}).join('')}</div><div class="note" style="font-size:13px">お弁当の数までお選びいただけます</div></details>`:''}</div>`).join('')}</section>`).join('')}
   </div><aside class="col-side"><section class="card"><h2>お受け取り</h2>
     <div class="seg">${(C.deliveryDates||[]).length?`<button type="button" data-m="delivery" class="${st.method==='delivery'?'on':''}">お届け（出前）</button>`:''}${(C.pickupDates||[]).length?`<button type="button" data-m="pickup" class="${st.method==='pickup'?'on':''}">店頭でお引き取り</button>`:''}</div>
-    <div><div class="note">日にち<span class="req">必須</span></div><div class="chips">${dates().map(d=>`<button type="button" class="chip ${st.date===d?'on':''}" data-date="${d}">${d===today?'今日 ':''}${md(d)}${dayRange(d)?`<small style="display:block;font-size:12px;font-weight:700;color:inherit;opacity:.9">${esc(dayRange(d))}</small>`:''}</button>`).join('')||'<span class="note">お店にご相談ください</span>'}</div></div>
+    <div><div class="note">日にち<span class="req">必須</span></div>${calHtml()}</div>
     <div><div class="note">ご希望の時間</div>${st.date&&dayText(st.date)?`<div class="info" style="margin:4px 0 8px;font-weight:700">※${esc(dayText(st.date))}</div>`:''}<div class="chips">${(st.date?daySlots(st.date):(C.timeSlots||[])).map(t=>`<button type="button" class="chip ${st.time===t?'on':''}" data-time="${esc(t)}">${esc(t)}</button>`).join('')}</div>
       <label class="f" style="margin-top:8px"><span>時間の備考<span class="note" style="margin-left:6px">例：11時半ごろ希望／午前中ならいつでも</span></span><input type="text" id="i_timeNote" value="${esc(st.timeNote||'')}" placeholder="ご希望があればご記入ください"></label></div></section>
   ${(D.payMethods||[]).length?`<section class="card"><h2>お支払い方法<span class="req">必須</span></h2><div class="chips">${D.payMethods.map(p=>`<button type="button" class="chip ${st.pay===p.name?'on':''}" data-pay="${esc(p.name)}">${esc(p.name)}</button>`).join('')}</div>${(()=>{const p=D.payMethods.find(x=>x.name===st.pay);return p&&p.note?`<div class="note" style="margin-top:6px">${esc(p.note)}</div>`:''})()}</section>`:''}
@@ -280,7 +295,7 @@ function confirmView(){
   const once=()=>{if(!once.d){once.d=1;markSent()}};const lb=$('#lineBtn');if(lb)lb.addEventListener('click',()=>{sendInbox(text);once()});const mb=$('#mailBtn');if(mb)mb.addEventListener('click',()=>{sendInbox(text.replace('（注文フォームより送信）','（注文フォームよりメールで送信）'));once()});
   $('#copyBtn').onclick=async()=>{sendInbox(text);once();try{await navigator.clipboard.writeText(text);$('#copyBtn').textContent='コピーしました。LINEのトークに貼り付けて送ってください'}catch(e){const sel=getSelection(),rg=document.createRange();rg.selectNodeContents($('#msgText'));sel.removeAllRanges();sel.addRange(rg);$('#copyBtn').textContent='文面を選択しました。コピーしてLINEに貼り付けてください'}};
 }
-document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
+document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;if(b.dataset.calm!==undefined){st.calM=+b.dataset.calm;render();return}
   if(b.dataset.d){const k=b.dataset.k;st.qty[k]=Math.max(0,(+st.qty[k]||0)+(+b.dataset.d));const i=document.querySelector(`[data-q="${CSS.escape(k)}"]`);if(i)i.value=st.qty[k]||'';save();updateBar();return}
   if(b.dataset.m){readInputs();st.method=b.dataset.m;if(!dates().includes(st.date))st.date='';if(st.date&&st.time&&!daySlots(st.date).includes(st.time))st.time='';save();render();return}
   if(b.dataset.pay!==undefined){readInputs();st.pay=b.dataset.pay;save();render();return}
