@@ -81,6 +81,7 @@ input::placeholder,textarea::placeholder{font-weight:500}
 .req{font-size:12.5px;font-weight:800}
 header .shop{font-size:14.5px;font-weight:700}header ul{font-size:15px;font-weight:600}header li.nb{list-style:none;margin-left:-18px;color:var(--hdr-sub,inherit)}header li.cxl{margin-top:4px;padding:6px 10px;border:1px solid var(--hdr-line,rgba(255,255,255,.5));border-radius:8px;list-style:none;margin-left:-18px;background:rgba(0,0,0,.12)}header h1{font-weight:700}
 .tot{font-size:24px;font-weight:800}
+@media print{body *{visibility:hidden}#orderCard,#orderCard *{visibility:visible}#orderCard{position:absolute;left:0;top:0;width:100%;box-shadow:none;border:0}#orderCard .noprint,#orderCard #sendArea,#orderCard .btn{display:none!important}#bar{display:none!important}#orderCard .msg{max-height:none!important;height:auto!important;overflow:visible!important}}
 </style>
 
 <div class="wrap" id="app"><div class="card"><h2>読み込み中</h2></div></div>
@@ -186,7 +187,7 @@ function render(){
     <label class="f"><span>お名前<span class="req">必須</span></span><input type="text" id="i_name" autocomplete="name" value="${esc(st.name)}"></label>
     <label class="f"><span>フリガナ<span class="note" style="margin-left:6px">お名前から自動で入ります（直せます）</span></span><input type="text" id="i_kana" value="${esc(st.kana)}"></label>
     <label class="f"><span>電話番号<span class="req">必須</span></span><input type="tel" id="i_phone" autocomplete="tel" inputmode="tel" placeholder="例：090-1234-5678（日中つながる番号）" value="${esc(st.phone)}"></label>
-    <label class="f"><span>メールアドレス<span class="note">（メールで連絡をご希望の方・パソコンからご注文の方）</span></span><input type="email" id="i_email" autocomplete="email" inputmode="email" placeholder="例：mifune@example.com" value="${esc(st.email||'')}"></label>
+    <label class="f"><span>メールアドレス<span class="note">（入れていただくと、送信後すぐに「ご注文内容の控え」がメールで届き、お店からの受付完了のご連絡もメールでお送りします）</span></span><input type="email" id="i_email" autocomplete="email" inputmode="email" placeholder="例：mifune@example.com" value="${esc(st.email||'')}"></label>
     <div class="f" style="display:flex;flex-direction:column;gap:4px;font-size:13px;color:var(--muted)">郵便番号<div style="display:flex;gap:8px"><input type="text" id="i_zip" inputmode="numeric" autocomplete="postal-code" value="${esc(st.zip)}" placeholder="例 194-0039" style="max-width:160px"><button type="button" class="btn" id="zipBtn">住所を検索</button></div><span class="note" id="zipMsg">7桁を入れると住所が自動で入ります</span></div>
     <label class="f"><span>${st.method==='delivery'?'お届け先のご住所':'ご住所'}<span class="req">必須</span></span><input type="text" id="i_address" autocomplete="street-address" value="${esc(st.address)}" placeholder="番地・建物名・部屋番号まで"></label>
     <label class="f">ご要望（アレルギー・お皿の分け方など）<textarea id="i_note">${esc(st.note)}</textarea></label></section>
@@ -241,6 +242,11 @@ const sentIds=new Set();
 function sendInbox(text){const u=String(D.inbox||'');if(!/^https:\/\/script\.google\.com\//.test(u)||!st.oid||sentIds.has(st.oid))return;sentIds.add(st.oid);
   const body=JSON.stringify({id:st.oid,text,form:C.name||''});let ok=false;try{ok=navigator.sendBeacon(u,new Blob([body],{type:'text/plain;charset=utf-8'}))}catch(e){}
   if(!ok){try{fetch(u,{method:'POST',mode:'no-cors',keepalive:true,headers:{'Content-Type':'text/plain;charset=utf-8'},body}).catch(()=>{})}catch(e){}}}
+/* 送信後：お客様用の「ご注文控え」（印刷・スクリーンショット保存） */
+function showKeep(){const k=$('#keepArea');if(!k)return;const h=$('#orderCard h2');if(h)h.textContent='ご注文の控え';
+  k.innerHTML=`<div class="info keep"><b>この画面がご注文の控えです。</b>受付番号：<b>${esc(st.ono||'')}</b><br><span class="note">あとで内容を確かめたり、お問い合わせのときにお使いいただけます。スクリーンショットで保存するか、下のボタンで印刷してください。${st.email?'<br>ご注文内容の控えは <b>'+esc(st.email)+'</b> あてにもメールでお届けします。':''}<br>お店で内容を確認したあと、<b>受付完了のご連絡</b>をお送りして、ご注文が確定します。</span>
+  <button type="button" class="btn noprint" id="printBtn" style="width:100%;margin-top:8px">控えを印刷する</button></div>`;
+  $('#printBtn').onclick=()=>window.print()}
 function confirmView(){
   readInputs();const r=calc();const errs=[];
   if(!r.items.length)errs.push('ご注文の数量を入れてください');if(!st.date)errs.push('お受け取りの日にちを選んでください');if(!st.name)errs.push('お名前を入れてください');if(!st.phone)errs.push('電話番号を入れてください');else{const pd=toHalf(st.phone).replace(/\D/g,'');if(!/^0\d{9,10}$/.test(pd))errs.push('電話番号は市外局番から10桁か11桁で入れてください（例：090-1234-5678）')}if(!st.address)errs.push(st.method==='delivery'?'お届け先のご住所を入れてください':'ご住所を入れてください');if((D.payMethods||[]).length&&!st.pay)errs.push('お支払い方法を選んでください');
@@ -255,7 +261,7 @@ function confirmView(){
   const isPC=!/Android|iPhone|iPad|iPod|Mobile/i.test(navigator.userAgent)&&!(navigator.maxTouchPoints>1&&/Macintosh/.test(navigator.userAgent));
   const oa=id?`https://line.me/R/oaMessage/${encodeURIComponent(id.startsWith('@')?id:'@'+id)}/?`:'';
   const url=id?`https://line.me/R/oaMessage/${encodeURIComponent(id.startsWith('@')?id:'@'+id)}/?${encodeURIComponent(text)}`:`https://line.me/R/msg/text/?${encodeURIComponent(text)}`;
-  box.innerHTML=`<section class="card"><h2>この内容で送ります</h2>${st.ono?`<div class="info" style="font-weight:700">受付番号：<span style="font-size:22px;letter-spacing:.06em;font-family:ui-monospace,Menlo,Consolas,monospace">${esc(st.ono)}</span><br><span class="note">お問い合わせの際にお伝えください。お店からの受付完了のご連絡（LINE・メール）にも同じ番号が書かれています。</span></div>`:''}<div class="msg" id="msgText">${esc(text)}</div>
+  box.innerHTML=`<section class="card" id="orderCard"><h2>この内容で送ります</h2><div id="keepArea"></div>${st.ono?`<div class="info" style="font-weight:700">受付番号：<span style="font-size:22px;letter-spacing:.06em;font-family:ui-monospace,Menlo,Consolas,monospace">${esc(st.ono)}</span><br><span class="note">お問い合わせの際にお伝えください。お店からの受付完了のご連絡（LINE・メール）にも同じ番号が書かれています。</span></div>`:''}<div class="msg" id="msgText">${esc(text)}</div>
     <div id="sendArea">
     ${isPC?`<div class="warn" style="margin-bottom:10px"><b>パソコンからご注文の方へ</b><br>パソコンではLINEアプリが開かないため、下の①か②で送信してください。</div>`:''}
     ${isPC?'':`<a class="btn line" id="lineBtn" href="${esc(url)}" target="_blank" rel="noopener" style="width:100%">LINEで注文を送る</a>
@@ -265,8 +271,8 @@ function confirmView(){
       <label class="f" style="margin-top:8px"><span>メールアドレス<span class="req">必須</span></span><input type="email" id="c_email" autocomplete="email" inputmode="email" placeholder="例：mifune@example.com" value="${esc(st.email||'')}"></label>
       <div class="warn" id="mailErr" hidden></div>
       <button type="button" class="btn pri" id="mailSend" style="width:100%;margin-top:8px">この内容で送信する（メールで連絡）</button></div>
-    ${isPC&&oa?`<div class="info" style="margin-top:10px"><b>② スマホのLINEで送る</b><br><span class="note">ボタンを押すとご注文がお店に届き、QRコードが出ます。スマホのカメラで読み取るとLINEが開きます（受付番号が入っています）。そのまま送信すると、以後のやりとりはLINEでできます。</span>
-      <button type="button" class="btn line" id="qrBtn" style="width:100%;margin-top:8px">QRコードを表示して送信する</button><div id="qrBox" style="text-align:center"></div></div>`:''}
+    ${isPC&&oa?`<div class="info" style="margin-top:10px"><b>② スマホのLINEで送る</b><br><span class="note">ボタンを押すと、ご注文の内容がお店の受付表に届き、QRコードが出ます。スマホのカメラで読み取るとLINEが開きます（受付番号が入っています）。<b>そのままLINEで送信してください。</b>お店からの受付完了のご連絡や、以後のやりとりはLINEでいたします。</span>
+      <button type="button" class="btn line" id="qrBtn" style="width:100%;margin-top:8px">ご注文を送って、LINE用のQRコードを出す</button><div id="qrBox" style="text-align:center"></div></div>`:''}
     <button type="button" class="btn" id="copyBtn" style="margin-top:10px">文面をコピーする（パソコン版LINEに貼り付ける方）</button>
     <div class="note">${s.tel?`お電話（<a href="tel:${esc(String(s.tel).replace(/[^0-9+]/g,''))}">${esc(s.tel)}</a>${s.telHours?'・'+esc(s.telHours):''}）${s.fax?`・FAX（${esc(s.fax)}）`:''}でも承ります。`:''}</div>
     </div>
@@ -275,19 +281,19 @@ function confirmView(){
     ${D.cancelText?`<div class="info" style="margin-bottom:8px"><b>変更・キャンセルについて</b><br>${esc(D.cancelText)}</div>`:''}
     <div class="warn">送信後、${D.confirmPhrase?esc(D.confirmPhrase)+'に':''}お店から受付完了のご連絡がない場合は、お手数ですが${D.contactBack?esc(D.contactBack):'お電話またはLINEでお店にご連絡ください。'}</div></section>`;
   box.scrollIntoView({behavior:'smooth',block:'start'});
-  const once=()=>{if(!once.d){once.d=1;markSent()}};const lb=$('#lineBtn');if(lb)lb.addEventListener('click',()=>{sendInbox(text);once()});
+  const once=()=>{if(!once.d){once.d=1;markSent();showKeep()}};const lb=$('#lineBtn');if(lb)lb.addEventListener('click',()=>{sendInbox(text);once()});
   const okMail=v=>/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v);
   const ms=$('#mailSend');if(ms)ms.onclick=()=>{const v=toHalf($('#c_email').value.trim());const er=$('#mailErr');
     if(!okMail(v)){er.hidden=false;er.textContent='メールアドレスを正しく入れてください（例：mifune@example.com）';$('#c_email').focus();return}
     st.email=v;save();saveProfile();const ei=$('#i_email');if(ei)ei.value=v;
     const t2=message(calc()).replace('（注文フォームより送信）','（注文フォームよりメールで送信・メールでの連絡希望）');sendInbox(t2);once();
     const mt=s.email?`mailto:${s.email}?subject=${encodeURIComponent(`【ご注文】${C.name||''} ${st.name}様 受付番号${st.ono||''}`)}&body=${encodeURIComponent(t2)}`:'';
-    $('#sendArea').innerHTML=`<div class="info"><b>ご注文を送信しました。</b><br>受付番号：<b>${esc(st.ono||'')}</b><br>お店から <b>${esc(v)}</b> あてに、受付完了のメールをお送りします（迷惑メールフォルダもご確認ください）。</div>${mt?`<div class="note" style="margin-top:8px">念のためご自分のメールからも送りたい方は<a href="${esc(mt)}">こちら</a>（メールソフトが開きます）。</div>`:''}`;
+    $('#sendArea').innerHTML=`<div class="info"><b>ご注文を送信しました。</b><br>受付番号：<b>${esc(st.ono||'')}</b><br>お店から <b>${esc(v)}</b> あてに、まず「ご注文内容の控え」のメールが自動で届きます。お店で内容を確認したあと、あらためて「受付完了」のメールをお送りします（迷惑メールフォルダもご確認ください）。</div>${mt?`<div class="note" style="margin-top:8px">念のためご自分のメールからも送りたい方は<a href="${esc(mt)}">こちら</a>（メールソフトが開きます）。</div>`:''}`;
     $('#sendArea').scrollIntoView({behavior:'smooth',block:'center'})};
   const qb=$('#qrBtn');if(qb)qb.onclick=()=>{const t2=text.replace('（注文フォームより送信）','（パソコンの注文フォームより送信・LINEで連絡）');sendInbox(t2);once();
     const short=`【ご注文】${C.name||''}\n受付番号：${st.ono||''}\n${st.name}様\n（注文フォームで送った注文です。詳しい内容はお店に届いています）`;
-    const box2=$('#qrBox');try{box2.innerHTML=`<div style="display:inline-block;background:#fff;padding:8px;border-radius:10px;margin-top:10px">${window.mifuneQrSvg(oa+encodeURIComponent(short),240)}</div><div class="note">スマホのカメラで読み取り、開いたLINEでそのまま送信してください。</div>`}catch(e){box2.innerHTML='<div class="warn">QRコードを表示できませんでした。①のメールか、お電話でご注文ください。</div>'}
-    qb.textContent='ご注文をお店に送信しました（QRコードは下）';qb.disabled=true};
+    const box2=$('#qrBox');try{box2.innerHTML=`<div style="display:inline-block;background:#fff;padding:8px;border-radius:10px;margin-top:10px">${window.mifuneQrSvg(oa+encodeURIComponent(short),240)}</div><div class="note">スマホのカメラで読み取り、開いたLINEで<b>「送信」</b>を押してください。LINEで送っていただくと、受付完了のご連絡をLINEでお届けできます。</div>`}catch(e){box2.innerHTML='<div class="warn">QRコードを表示できませんでした。①のメールか、お電話でご注文ください。</div>'}
+    qb.textContent='お店の受付表に届きました。下のQRコードからLINEで送信してください';qb.disabled=true};
   $('#copyBtn').onclick=async()=>{sendInbox(text);once();try{await navigator.clipboard.writeText(text);$('#copyBtn').textContent='コピーしました。LINEのトークに貼り付けて送ってください'}catch(e){const sel=getSelection(),rg=document.createRange();rg.selectNodeContents($('#msgText'));sel.removeAllRanges();sel.addRange(rg);$('#copyBtn').textContent='文面を選択しました。コピーしてLINEに貼り付けてください'}};
 }
 document.addEventListener('click',e=>{const b=e.target.closest('button');if(!b)return;
