@@ -277,16 +277,16 @@ function showKeep(){const k=$('#keepArea');if(!k)return;const h=$('#orderCard h2
   $('#printBtn').onclick=()=>window.print()}
 function confirmView(){
   readInputs();const r=calc();const errs=[];D.menu.forEach(m=>{if(m.free&&mainQty(m)>0&&!(+((st.fp||{})[m.id])>0))errs.push(`「${m.name}」の金額を入れてください`)});
-  if(!r.items.length)errs.push('ご注文の数量を入れてください');if(!st.date)errs.push('お受け取りの日にちを選んでください');if(!st.name)errs.push('お名前を入れてください');if(!st.phone)errs.push('電話番号を入れてください');else{const pd=toHalf(st.phone).replace(/\D/g,'');if(!/^0\d{9,10}$/.test(pd))errs.push('電話番号は市外局番から10桁か11桁で入れてください（例：090-1234-5678）')}if(!st.address)errs.push(st.method==='delivery'?'お届け先のご住所を入れてください':'ご住所を入れてください');if((D.payMethods||[]).length&&!st.pay)errs.push('お支払い方法を選んでください');if(C.rentalNote&&!st.bihin)errs.push('備品の貸し出しが必要か不要かを選んでください');if(C.tableFee&&!st.table)errs.push('テーブル設置が必要か不要かを選んでください');if(C.tableFee&&r.items.length&&r.items.every(i=>i.m.hidden))errs.push('お料理の数量を入れてください');if(C.containerTax&&!st.yoki)errs.push('容器の種類（使い捨て容器／回収容器）を選んでください');
+  if(!r.items.length)errs.push('ご注文の数量を入れてください');if(!st.date)errs.push('お受け取りの日にちが選ばれていません（「お受け取り」の欄で日にちを押してください）');if(!st.name)errs.push('お名前を入れてください');if(!st.phone)errs.push('電話番号を入れてください');else{const pd=toHalf(st.phone).replace(/\D/g,'');if(!/^0\d{9,10}$/.test(pd))errs.push('電話番号は市外局番から10桁か11桁で入れてください（例：090-1234-5678）')}if(!st.address)errs.push(st.method==='delivery'?'お届け先のご住所を入れてください':'ご住所を入れてください');if((D.payMethods||[]).length&&!st.pay)errs.push('お支払い方法を選んでください');if(C.rentalNote&&!st.bihin)errs.push('備品の貸し出しが必要か不要かを選んでください');if(C.tableFee&&!st.table)errs.push('テーブル設置が必要か不要かを選んでください');if(C.tableFee&&r.items.length&&r.items.every(i=>i.m.hidden))errs.push('お料理の数量を入れてください');if(C.containerTax&&!st.yoki)errs.push('容器の種類（使い捨て容器／回収容器）を選んでください');
   {const hp=$('#i_hp');if(hp)hp.value=''}
-  if(Date.now()-T0<6000)errs.push('入力内容をもう一度ご確認のうえ、「内容を確認する」を押してください。');
+  if(Date.now()-T0<6000)errs.push('もう一度「内容を確認する」を押してください（押すのが早すぎました）');
   {const bad=D.menu.filter(m=>{const n=mainQty(m);const rice=['oomori','mega'].reduce((t,a)=>t+(+st.qty[m.id+'+'+a]||0),0);return rice>n||(+st.qty[m.id+'+okazu']||0)>n});if(bad.length)errs.push(`大盛り・おかず増の数が、お弁当の数より多くなっています（${bad.map(m=>m.name).join('、')}）`)}
   {const over=r.items.filter(i=>i.q>G.maxQty&&!i.m.isAdd);if(over.length)errs.push(`1品目${G.maxQty}点を超えるご注文は、お電話（${(D.shop||{}).tel||'お店'}）で承ります（${over.map(i=>i.m.name).join('、')}）`)}
   if(G.daily&&sentToday()>=G.daily)errs.push(`この端末からの本日のご注文は${G.daily}回までです。追加のご注文はお電話（${(D.shop||{}).tel||'お店'}）でお願いいたします。`);
   if(C.minOrder&&r.tot<C.minOrder)errs.push(`${yen(C.minOrder)}（税込）以上のご注文で承ります`);
   if(st.email&&!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(st.email))errs.push('メールアドレスを正しく入れてください（例：mifune@example.com）。メールが不要な方は空欄のままで大丈夫です');
   const box=$('#confirm');
-  if(errs.length){box.innerHTML=`<div class="warn">${errs.map(esc).join('<br>')}</div>`;box.scrollIntoView({behavior:'smooth',block:'center'});return}
+  if(errs.length){box.innerHTML=`<div class="warn"><b>まだ送れません。次のところを入れ直してください。</b><br>${errs.map(e=>'・'+esc(e)).join('<br>')}</div>`;box.scrollIntoView({behavior:'smooth',block:'center'});return}
   saveProfile();const sig=JSON.stringify([st.qty,st.method,st.date,st.time,st.name,st.phone,st.email,st.address,st.note,st.timeNote,st.pay,st.bihin,st.yoki,st.table]);if(!st.oid||st.oidSig!==sig){st.ono=makeNo();st.oid=st.ono+'-'+Math.random().toString(36).slice(2,6).toUpperCase();st.oidSig=sig;save()}const text=message(r);const s=D.shop||{};const id=String(s.lineId||'').trim();
   const url=id?`https://line.me/R/oaMessage/${encodeURIComponent(id.startsWith('@')?id:'@'+id)}/?${encodeURIComponent(text)}`:`https://line.me/R/msg/text/?${encodeURIComponent(text)}`;
   const em=String(s.email||'').trim();const mail=em?`mailto:${em}?subject=${encodeURIComponent(`【ご注文】${C.name||''} ${st.name}様 ${md(st.date)}`)}&body=${encodeURIComponent(text)}`:'';
